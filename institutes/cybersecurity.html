@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cybersecurity &amp; Cryptography — CARCE</title>
+<link rel="stylesheet" href="../../shared.css">
+<style>
+:root{--inst:#F87171;}
+.ph-eyebrow,.ew{color:var(--inst)!important}
+.ph-eyebrow::before,.ew::before{background:linear-gradient(90deg,var(--inst),transparent)!important}
+.ph-title em{color:var(--inst)!important}
+.sh em{color:var(--inst)!important}
+.inst-stats{display:flex;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:2rem}
+.istat{padding:1.6rem 2rem;text-align:center;border-right:1px solid var(--border);flex:1;transition:background .3s}
+.istat:last-child{border-right:none}.istat:hover{background:var(--navy3)}
+.istat-n{font-family:'Syne',sans-serif;font-weight:800;font-size:2.4rem;display:block;line-height:1;color:var(--inst);}
+.istat-l{font-family:'Syne',sans-serif;font-size:.54rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.lab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;margin-top:2.5rem}
+.lab-card{border:1px solid var(--border);background:var(--navy2);border-radius:12px;padding:2rem 1.8rem;transition:all .38s;cursor:none;position:relative;overflow:hidden}
+.lab-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--inst),transparent);transform:scaleX(0);transition:transform .45s}
+.lab-card:hover{background:var(--navy3);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.35)}.lab-card:hover::after{transform:scaleX(1)}
+.lab-emoji{font-size:2rem;margin-bottom:.8rem;display:block}
+.lab-abbr{font-family:'Syne',sans-serif;font-size:.54rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--inst);margin-bottom:.6rem}
+.lab-name{font-family:'Syne',sans-serif;font-weight:700;font-size:1.05rem;color:var(--text);margin-bottom:.4rem;line-height:1.35}
+.lab-lead{font-size:.68rem;color:var(--muted);margin-bottom:.9rem}
+.lab-desc{font-size:.76rem;color:var(--muted);line-height:1.68;margin-bottom:1.2rem}
+.lab-projs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.4rem}
+.proj-tag{font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:5px;background:rgba(0,212,200,.06);color:var(--teal);border:1px solid rgba(0,212,200,.18)}
+.lab-link{font-family:'Syne',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--inst);text-decoration:none;transition:letter-spacing .25s}
+.lab-link:hover{letter-spacing:.2em}
+.pub-list{display:flex;flex-direction:column}
+.pub-row{display:grid;grid-template-columns:50px 1fr;gap:1.6rem;padding:1.5rem 0;border-bottom:1px solid rgba(0,212,200,.06);cursor:none;transition:padding-left .3s,background .2s;border-radius:6px}
+.pub-row:first-child{border-top:1px solid rgba(0,212,200,.06)}.pub-row:hover{padding-left:.7rem;background:rgba(0,212,200,.025)}
+.py{font-family:'Syne',sans-serif;font-size:.78rem;font-weight:700;color:var(--teal);padding-top:3px}
+.ptt{font-family:'Syne',sans-serif;font-weight:700;font-size:.98rem;color:var(--text);margin-bottom:.4rem;line-height:1.4}
+.paa{font-size:.7rem;color:var(--muted);margin-bottom:3px}
+.pjj{font-size:.7rem;color:var(--amber)}
+.pbadge{display:inline-block;margin-top:6px;font-family:'Syne',sans-serif;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 10px;border-radius:5px;border:1px solid rgba(255,184,48,.4);color:var(--amber);background:rgba(255,184,48,.06)}
+@media(max-width:1000px){.lab-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.lab-grid{grid-template-columns:1fr}.inst-stats{flex-direction:column}.istat{border-right:none;border-bottom:1px solid var(--border)}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="cur"></div><div id="curR"></div><nav id="nav">
+  <a href="../../index.html" class="logo-wrap">
+    <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="50,3 94,27 94,73 50,97 6,73 6,27" stroke="url(#lo1)" stroke-width="1.4" fill="rgba(0,212,200,0.03)"/>
+      <polygon points="50,15 83,33 83,67 50,85 17,67 17,33" stroke="url(#lo2)" stroke-width=".9" fill="none" opacity=".45"/>
+      <circle cx="50" cy="3"  r="3.2" fill="#00D4C8"/>
+      <circle cx="94" cy="27" r="3.2" fill="#00D4C8"/>
+      <circle cx="94" cy="73" r="3.2" fill="#FFB830"/>
+      <circle cx="50" cy="97" r="3.2" fill="#FFB830"/>
+      <circle cx="6"  cy="73" r="3.2" fill="#00D4C8"/>
+      <circle cx="6"  cy="27" r="3.2" fill="#00D4C8"/>
+      <line x1="50" y1="3"  x2="50" y2="15"  stroke="#00D4C8" stroke-width="1.4"/>
+      <line x1="94" y1="27" x2="83" y2="33"  stroke="#00D4C8" stroke-width="1.4"/>
+      <line x1="94" y1="73" x2="83" y2="67"  stroke="#FFB830" stroke-width="1.4"/>
+      <line x1="50" y1="97" x2="50" y2="85"  stroke="#FFB830" stroke-width="1.4"/>
+      <line x1="6"  y1="73" x2="17" y2="67"  stroke="#00D4C8" stroke-width="1.4"/>
+      <line x1="6"  y1="27" x2="17" y2="33"  stroke="#00D4C8" stroke-width="1.4"/>
+      <circle cx="50" cy="50" r="20" fill="url(#lcg)" opacity=".92"/>
+      <line x1="50" y1="34" x2="50" y2="66" stroke="rgba(6,14,30,.85)" stroke-width="2.2"/>
+      <line x1="34" y1="50" x2="66" y2="50" stroke="rgba(6,14,30,.85)" stroke-width="2.2"/>
+      <circle cx="50" cy="50" r="5" fill="rgba(6,14,30,.9)"/>
+      <circle cx="50" cy="50" r="2.5" fill="#00D4C8"/>
+      <circle cx="50" cy="50" r="1" fill="white"/>
+      <defs>
+        <linearGradient id="lo1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00F5E8"/><stop offset="100%" stop-color="#00D4C8"/></linearGradient>
+        <linearGradient id="lo2" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFD166"/><stop offset="100%" stop-color="#FFB830"/></linearGradient>
+        <radialGradient id="lcg" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#00F5E8" stop-opacity=".95"/><stop offset="50%" stop-color="#00A89E"/><stop offset="100%" stop-color="#060E1E" stop-opacity="0"/></radialGradient>
+      </defs>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-wordmark">C<span class="accent">A</span>RCE</span>
+      <span class="logo-tagline">Center for Advanced Research in Computer Engineering</span>
+    </div>
+  </a>
+  <ul class="nlinks">
+    <li><a href="../../about/index.html">About</a></li>
+    <li><a href="../../institutes/index.html">Institutes</a></li>
+    <li><a href="../../research/index.html">Research</a></li>
+    <li><a href="../../people/index.html">People</a></li>
+    <li><a href="../../news/index.html">News</a></li>
+    <li><a href="../../join/index.html" class="nav-cta">Join Us</a></li>
+  </ul>
+</nav><div class="breadcrumb"><a href="../../index.html">Home</a><span class="bc-sep">›</span><a href="../index.html">Institutes</a><span class="bc-sep">›</span><span class="bc-cur">Cybersecurity</span></div>
+<div class="page-hero"><div class="ph-bg"></div><div class="ph-grid"></div>
+  <p class="ph-eyebrow">Institute · 03</p>
+  <h1 class="ph-title">🔐&nbsp; <em>Cybersecurity</em></h1>
+  <p class="ph-sub">The Institute for Cybersecurity &amp; Cryptography develops the theoretical and practical foundations of secure computing in a post-quantum world. Our laboratories address cryptographic protocols, hardware security, and adversarial machine learning.</p>
+</div><div class="abar"><div class="atrack"><span class="aitem"><span class="agem"></span>Breakthrough · 1,000-Qubit Coherence Achieved</span><span class="aitem"><span class="agem"></span>Careers · 12 Postdoc Positions Open</span><span class="aitem"><span class="agem"></span>Award · Best Paper IEEE S&amp;P 2025</span><span class="aitem"><span class="agem"></span>Partnership · CERN Collaboration</span><span class="aitem"><span class="agem"></span>Event · AI Safety Summit June 2025</span><span class="aitem"><span class="agem"></span>Grant · $18M NSF Award Green Computing</span><span class="aitem"><span class="agem"></span>Publication · Nature Photonics All-Optical NN</span><span class="aitem"><span class="agem"></span>Breakthrough · 1,000-Qubit Coherence Achieved</span><span class="aitem"><span class="agem"></span>Careers · 12 Postdoc Positions Open</span><span class="aitem"><span class="agem"></span>Award · Best Paper IEEE S&amp;P 2025</span><span class="aitem"><span class="agem"></span>Partnership · CERN Collaboration</span><span class="aitem"><span class="agem"></span>Event · AI Safety Summit June 2025</span><span class="aitem"><span class="agem"></span>Grant · $18M NSF Award Green Computing</span><span class="aitem"><span class="agem"></span>Publication · Nature Photonics All-Optical NN</span></div></div><div class="sw">
+  <div class="inst-stats sr">
+    <div class="istat"><span class="istat-n">3</span><span class="istat-l">Laboratories</span></div>
+    <div class="istat"><span class="istat-n">24+</span><span class="istat-l">Researchers</span></div>
+    <div class="istat"><span class="istat-n">180+</span><span class="istat-l">Publications</span></div>
+    <div class="istat"><span class="istat-n">$32M</span><span class="istat-l">Funding</span></div>
+  </div>
+  <div style="margin-top:3rem">
+    <p class="ew">Laboratories</p>
+    <h2 class="sh">Three Specialized <em>Laboratories</em></h2>
+    <p class="si2" style="margin-bottom:0">Each lab operates independently with dedicated staff, shared institute infrastructure, and its own research agenda.</p>
+    <div class="lab-grid">
+    <div class="lab-card sr tilt">
+      <div class="lab-emoji">🔑</div>
+      <div class="lab-abbr">CPL</div>
+      <h3 class="lab-name">Cryptographic Protocols Laboratory</h3>
+      <div class="lab-lead">Dir: Dr. Teresa Moreira</div>
+      <p class="lab-desc">Lattice-based and post-quantum cryptographic constructions, zero-knowledge proofs, secure multi-party computation, and verifiable credentials.</p>
+      <div class="lab-projs"><span class="proj-tag">CRYSTALS-Kyber Optimization</span><span class="proj-tag">ZK-SNARK Systems</span><span class="proj-tag">Homomorphic Encryption</span><span class="proj-tag">Threshold Signatures</span></div>
+      <a href="../../labs/cybersecurity/cryptography.html" class="lab-link">Visit Laboratory →</a>
+    </div>
+    <div class="lab-card sr tilt">
+      <div class="lab-emoji">🖥️</div>
+      <div class="lab-abbr">HSTS</div>
+      <h3 class="lab-name">Hardware Security &amp; Trusted Systems Lab</h3>
+      <div class="lab-lead">Dir: Dr. Rahul Singh</div>
+      <p class="lab-desc">Side-channel attacks and countermeasures, secure enclaves, hardware root-of-trust, and supply-chain integrity for critical computing infrastructure.</p>
+      <div class="lab-projs"><span class="proj-tag">Post-Spectre Architectures</span><span class="proj-tag">TEE Formal Verification</span><span class="proj-tag">PUF-Based Identity</span><span class="proj-tag">RISC-V Secure Extensions</span></div>
+      <a href="../../labs/cybersecurity/hardware-security.html" class="lab-link">Visit Laboratory →</a>
+    </div>
+    <div class="lab-card sr tilt">
+      <div class="lab-emoji">🛡️</div>
+      <div class="lab-abbr">AMND</div>
+      <h3 class="lab-name">Adversarial ML &amp; Network Defense Lab</h3>
+      <div class="lab-lead">Dir: Dr. Pei Zhao</div>
+      <p class="lab-desc">Robustness of AI systems under adversarial perturbation, network intrusion detection, automated vulnerability discovery, and AI-powered threat intelligence.</p>
+      <div class="lab-projs"><span class="proj-tag">Certified Robustness</span><span class="proj-tag">LLM Red-Teaming</span><span class="proj-tag">Network Anomaly Detection</span><span class="proj-tag">Autonomous Pen-Testing</span></div>
+      <a href="../../labs/cybersecurity/adversarial-ml.html" class="lab-link">Visit Laboratory →</a>
+    </div></div>
+  </div>
+</div><div class="swa">
+  <p class="ew">Selected Publications</p>
+  <h2 class="sh">Recent <em>Research</em></h2>
+  <div class="pub-list" style="margin-top:2rem">
+    <div class="pub-row sr"><div class="py">2025</div><div><div class="ptt">Flagship 2025 Result — Landmark Contribution to Cybersecurity Science</div><div class="paa">Lead Author et al. · Cybersecurity</div><div class="pjj">Nature / Science 2025</div><span class="pbadge">Featured Article</span></div></div>
+    <div class="pub-row sr"><div class="py">2025</div><div><div class="ptt">Advanced Methods from Cybersecurity — Theory and Empirical Study</div><div class="paa">Senior Researcher, C. · Cybersecurity</div><div class="pjj">Top Conference 2025</div><span class="pbadge">Best Paper</span></div></div>
+    <div class="pub-row sr"><div class="py">2024</div><div><div class="ptt">Foundational Work Establishing New Paradigms in Cybersecurity Research</div><div class="paa">Institute Faculty · Cybersecurity</div><div class="pjj">Flagship Journal 2024</div></div></div>
+  </div>
+  <div style="margin-top:2rem"><a href="../../research/index.html" class="btn-s">All Publications →</a></div>
+</div><footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-wm">C<span class="accent">A</span>RCE</div>
+      <div class="ft-tag">Engineering the systems that define the next century.</div>
+      <div class="ft-desc">Center for Advanced Research in Computer Engineering. Eight institutes · 24 labs · 320+ researchers across 47 nations.</div>
+      <div class="ft-soc">
+        <a class="soc-btn" href="#" data-tip="Twitter">𝕏</a>
+        <a class="soc-btn" href="#" data-tip="GitHub">⌥</a>
+        <a class="soc-btn" href="#" data-tip="LinkedIn">in</a>
+        <a class="soc-btn" href="#" data-tip="arXiv">∂</a>
+      </div>
+    </div>
+    <div class="ft-col"><h4>Research</h4><ul class="ft-nav"><li><a href="../../institutes/index.html">All Institutes</a></li><li><a href="../../research/index.html">Publications</a></li><li><a href="../../research/index.html">Datasets</a></li><li><a href="../../research/index.html">Patents</a></li></ul></div>
+    <div class="ft-col"><h4>Community</h4><ul class="ft-nav"><li><a href="../../people/index.html">Our Team</a></li><li><a href="../../news/index.html">News</a></li><li><a href="../../news/index.html">Events</a></li><li><a href="../../news/index.html">Blog</a></li></ul></div>
+    <div class="ft-col"><h4>Organization</h4><ul class="ft-nav"><li><a href="../../about/index.html">About CARCE</a></li><li><a href="../../join/index.html">Careers</a></li><li><a href="../../about/index.html">Partners</a></li><li><a href="../../about/index.html">Contact</a></li></ul></div>
+  </div>
+  <div class="ft-bot">
+    <span>© 2025 Center for Advanced Research in Computer Engineering. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Use · Accessibility</span>
+  </div>
+</footer><script src="../../shared.js"></script>
+</body>
+</html>

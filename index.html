@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CARCE — Center for Advanced Research in Computer Engineering</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ─── HERO ───────────────────────────────── */
+#hero {
+  position:relative; min-height:100vh;
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; text-align:center;
+  padding:120px 6vw 80px; overflow:hidden;
+}
+#pcanvas { position:absolute; inset:0; z-index:0; }
+.h-grid {
+  position:absolute; inset:0; z-index:0;
+  background-image:
+    linear-gradient(rgba(0,212,200,.038) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,212,200,.038) 1px,transparent 1px);
+  background-size:65px 65px;
+}
+.h-glow  { position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,200,.11) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-55%);pointer-events:none;z-index:0; }
+.h-glow2 { position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,184,48,.08) 0%,transparent 70%);top:10%;right:5%;pointer-events:none;z-index:0;animation:floatB 9s ease-in-out infinite; }
+.h-glow3 { position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.07) 0%,transparent 70%);bottom:15%;left:5%;pointer-events:none;z-index:0;animation:floatB 7s 2s ease-in-out infinite; }
+@keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-25px)} }
+
+.hero-inner { position:relative; z-index:2; }
+
+.h-badge {
+  display:inline-flex; align-items:center; gap:10px;
+  background:rgba(0,212,200,.1); border:1px solid rgba(0,212,200,.3);
+  padding:8px 22px; border-radius:100px;
+  font-family:'Syne',sans-serif; font-size:.62rem; font-weight:600;
+  letter-spacing:.18em; text-transform:uppercase; color:var(--teal);
+  margin-bottom:2.5rem; animation:fadeUp 1s ease both;
+}
+.badge-dot { width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(0,212,200,.7);animation:ping 2.2s ease infinite; }
+@keyframes ping { 0%,100%{box-shadow:0 0 0 0 rgba(0,212,200,.7)} 60%{box-shadow:0 0 0 8px rgba(0,212,200,0)} }
+
+h1.hero-title {
+  font-family:'Syne',sans-serif; font-weight:800;
+  font-size:clamp(3rem,8.5vw,9rem); line-height:.9;
+  letter-spacing:-.03em; margin-bottom:.5rem;
+  animation:fadeUp 1s .1s ease both;
+}
+.ht1 { display:block; color:var(--text); }
+.ht2 {
+  display:block; font-style:italic; font-family:'Inter',sans-serif; font-weight:200;
+  background:linear-gradient(100deg,var(--teal2) 0%,var(--teal) 35%,var(--amber) 70%,var(--amber2) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  background-size:200% auto; animation:shimmer 5s linear infinite, fadeUp 1s .15s ease both;
+}
+@keyframes shimmer { from{background-position:200%} to{background-position:-200%} }
+.ht3 { display:block; color:var(--plat); font-weight:300; letter-spacing:-.01em; }
+
+.h-tw-row {
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  font-size:clamp(.95rem,2vw,1.22rem); color:var(--plat); margin:1.6rem 0 .6rem;
+  animation:fadeUp 1s .22s ease both;
+}
+.tw-word { color:var(--teal); font-weight:500; min-width:290px; text-align:left; }
+.tw-cursor { color:var(--amber); animation:blink .9s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:0} }
+
+.h-sub {
+  font-size:clamp(.9rem,1.8vw,1.12rem); color:var(--plat);
+  max-width:580px; line-height:1.82; margin:0 auto;
+  animation:fadeUp 1s .28s ease both;
+}
+.h-ctas { display:flex; gap:1rem; margin-top:2.8rem; justify-content:center; flex-wrap:wrap; animation:fadeUp 1s .36s ease both; }
+
+/* Stats band */
+.h-stats {
+  display:flex; flex-wrap:wrap; margin-top:5rem;
+  background:rgba(10,22,40,.75); backdrop-filter:blur(20px) saturate(200%);
+  border:1px solid var(--border); border-radius:14px; overflow:hidden;
+  animation:fadeUp 1s .44s ease both;
+}
+.hstat {
+  padding:1.8rem 2.2rem; text-align:center;
+  border-right:1px solid var(--border); flex:1; min-width:110px;
+  transition:background .3s; position:relative;
+}
+.hstat:last-child { border-right:none; }
+.hstat:hover { background:rgba(0,212,200,.07); }
+.hstat::after { content:'';position:absolute;bottom:0;left:10%;right:10%;height:2px;background:linear-gradient(90deg,transparent,var(--teal),transparent);transform:scaleX(0);transition:transform .4s; }
+.hstat:hover::after { transform:scaleX(1); }
+.hn {
+  font-family:'Syne',sans-serif; font-weight:800; font-size:2.5rem; display:block; line-height:1;
+  background:linear-gradient(135deg,var(--teal2),var(--amber));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+}
+.hl { font-size:.52rem; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:5px; font-family:'Syne',sans-serif; }
+
+/* Scroll indicator */
+.scroll-ind {
+  position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  z-index:2; color:var(--muted); font-size:.55rem; letter-spacing:.2em;
+  text-transform:uppercase; cursor:none; text-decoration:none;
+  animation:fadeUp 1s .56s ease both;
+}
+.scroll-mouse { width:22px;height:34px;border:1.5px solid rgba(0,212,200,.35);border-radius:11px;display:flex;justify-content:center;padding-top:6px; }
+.scroll-wheel { width:3px;height:7px;background:var(--teal);border-radius:2px;animation:scrollW 1.8s ease infinite; }
+@keyframes scrollW { 0%,100%{opacity:1;transform:translateY(0)} 50%{opacity:.3;transform:translateY(8px)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
+
+/* ─── ABOUT ──────────────────────────── */
+.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:6vw; align-items:center; }
+.logo-orbital { position:relative; width:320px; height:320px; margin:auto; display:flex; align-items:center; justify-content:center; }
+.orb-ring { position:absolute; border-radius:50%; }
+.orb-ring:nth-child(1) { width:310px;height:310px;border:1px solid rgba(0,212,200,.15);animation:spin 50s linear infinite; }
+.orb-ring:nth-child(2) { width:240px;height:240px;border:1px solid rgba(255,184,48,.12);animation:spin 35s linear infinite reverse; }
+.orb-ring:nth-child(3) { width:175px;height:175px;border:1px solid rgba(0,212,200,.1);animation:spin 22s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
+.orb-ring::before { content:'';position:absolute;width:9px;height:9px;border-radius:50%;top:-4.5px;left:50%;transform:translateX(-50%); }
+.orb-ring:nth-child(1)::before { background:var(--teal);box-shadow:0 0 12px var(--teal); }
+.orb-ring:nth-child(2)::before { background:var(--amber);box-shadow:0 0 12px var(--amber); }
+.orb-ring:nth-child(3)::before { background:var(--violet);box-shadow:0 0 10px var(--violet); }
+.orb-center { position:relative;z-index:2;width:130px;height:130px;animation:levitate 6s ease-in-out infinite; }
+@keyframes levitate { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+.pillars-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:10px; overflow:hidden; margin-top:2rem; }
+.pillar { background:var(--navy2); padding:1.4rem 1.5rem; transition:background .3s; }
+.pillar:hover { background:var(--navy3); }
+.pil-i { font-size:1.5rem; margin-bottom:.5rem; display:block; }
+.pil-n { font-family:'Syne',sans-serif; font-size:.62rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); margin-bottom:.3rem; }
+.pil-d { font-size:.75rem; color:var(--muted); line-height:1.6; }
+
+/* ─── INSTITUTES GRID ────────────────── */
+.inst-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.4rem; }
+.ic {
+  background:var(--navy2); border:1px solid var(--border); border-radius:12px;
+  padding:2rem 1.6rem; position:relative; overflow:hidden;
+  cursor:none; transition:all .38s; text-decoration:none; display:block;
+}
+.ic .ic-shine {
+  position:absolute; inset:0; border-radius:inherit;
+  background:radial-gradient(circle at var(--gx,50%) var(--gy,50%), rgba(0,212,200,.07) 0%, transparent 60%);
+  opacity:0; transition:opacity .4s;
+}
+.ic:hover .ic-shine { opacity:1; }
+.ic::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--ic-c,var(--teal)),transparent);transform:scaleX(0);transform-origin:center;transition:transform .45s ease;border-radius:12px 12px 0 0; }
+.ic:hover { border-color:var(--ic-c,var(--teal));transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.35),0 0 0 1px var(--border); }
+.ic:hover::before { transform:scaleX(1); }
+.ic-num { font-family:'Syne',sans-serif; font-size:.5rem; font-weight:600; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin-bottom:1.1rem; }
+.ic-sym { font-size:2rem; margin-bottom:.9rem; display:block; }
+.ic-name { font-family:'Syne',sans-serif; font-weight:700; font-size:.98rem; color:var(--text); line-height:1.32; margin-bottom:.6rem; position:relative; z-index:1; }
+.ic-desc { font-size:.73rem; color:var(--muted); line-height:1.65; margin-bottom:1rem; position:relative; z-index:1; }
+.ic-chips { display:flex; flex-wrap:wrap; gap:5px; position:relative; z-index:1; }
+.ic-chip { font-size:.5rem; letter-spacing:.1em; text-transform:uppercase; padding:3px 9px; border-radius:5px; background:rgba(0,212,200,.07); color:var(--teal); border:1px solid rgba(0,212,200,.2); transition:background .2s; }
+.ic:hover .ic-chip { background:rgba(0,212,200,.12); }
+.ic-go { position:absolute; bottom:1.4rem; right:1.5rem; font-family:'Syne',sans-serif; font-size:.58rem; font-weight:600; letter-spacing:.12em; color:var(--ic-c,var(--teal)); opacity:0; transform:translateX(-6px); transition:all .3s; z-index:1; }
+.ic:hover .ic-go { opacity:1; transform:translateX(0); }
+
+/* ─── RESEARCH TABS ──────────────────── */
+.tab-row { display:flex; gap:.5rem; border-bottom:1px solid var(--border); padding-bottom:.5rem; margin-bottom:2rem; }
+.tab-btn {
+  font-family:'Syne',sans-serif; font-size:.62rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  padding:8px 18px; border:1px solid transparent; background:none;
+  color:var(--muted); cursor:none; border-radius:7px 7px 0 0; transition:all .25s;
+  position:relative;
+}
+.tab-btn::after { content:'';position:absolute;bottom:-9px;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--amber));transform:scaleX(0);transition:transform .3s;border-radius:1px; }
+.tab-btn.active { color:var(--teal);background:rgba(0,212,200,.07); }
+.tab-btn.active::after { transform:scaleX(1); }
+.tab-btn:hover { color:var(--text); }
+.tab-pane { display:none; opacity:0; }
+.tab-pane.active { display:block; opacity:1; }
+
+.pub-entry { display:grid; grid-template-columns:52px 1fr; gap:1.6rem; padding:1.6rem 0; border-bottom:1px solid rgba(0,212,200,.06); cursor:none; transition:padding-left .3s,background .2s; border-radius:6px; }
+.pub-entry:first-child { border-top:1px solid rgba(0,212,200,.06); }
+.pub-entry:hover { padding-left:.7rem; background:rgba(0,212,200,.025); }
+.pyr { font-family:'Syne',sans-serif; font-size:.78rem; font-weight:700; color:var(--teal); padding-top:3px; }
+.pt { font-family:'Syne',sans-serif; font-weight:700; font-size:.98rem; color:var(--text); margin-bottom:.4rem; line-height:1.42; }
+.pa { font-size:.7rem; color:var(--muted); margin-bottom:3px; }
+.pj { font-size:.7rem; color:var(--amber); }
+.paw { display:inline-block; margin-top:6px; font-family:'Syne',sans-serif; font-size:.5rem; letter-spacing:.14em; text-transform:uppercase; padding:3px 10px; border-radius:5px; border:1px solid rgba(255,184,48,.4); color:var(--amber); background:rgba(255,184,48,.06); }
+
+/* ─── NEWS ───────────────────────────── */
+.news-grid { display:grid; grid-template-columns:1.65fr 1fr 1fr; gap:1.4rem; margin-top:2.5rem; }
+.nc { border:1px solid var(--border); background:var(--navy2); border-radius:12px; overflow:hidden; cursor:none; transition:all .38s; text-decoration:none; display:block; }
+.nc:hover { border-color:var(--teal); transform:translateY(-5px); box-shadow:0 20px 50px rgba(0,0,0,.35); }
+.nth { height:180px; display:flex; align-items:center; justify-content:center; font-size:2.8rem; position:relative; overflow:hidden; }
+.nc.lead .nth { height:240px; }
+.nth-over { position:absolute;inset:0;background:linear-gradient(to bottom,transparent 30%,rgba(10,22,40,.95)); }
+.nb { padding:1.6rem; }
+.nk { font-family:'Syne',sans-serif; font-size:.54rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--teal); margin-bottom:.65rem; display:flex; align-items:center; gap:8px; }
+.nk::before { content:''; display:block; width:14px; height:2px; background:linear-gradient(90deg,var(--teal),var(--amber)); border-radius:1px; }
+.nt { font-family:'Syne',sans-serif; font-weight:700; font-size:.97rem; color:var(--text); line-height:1.42; margin-bottom:.55rem; }
+.nc.lead .nt { font-size:1.22rem; }
+.nbl { font-size:.76rem; color:var(--muted); line-height:1.62; }
+.nf { font-size:.56rem; letter-spacing:.1em; color:var(--dim); margin-top:.9rem; padding-top:.8rem; border-top:1px solid rgba(0,212,200,.07); display:flex; justify-content:space-between; align-items:center; }
+.nf-link { color:var(--teal); font-family:'Syne',sans-serif; font-weight:600; font-size:.56rem; letter-spacing:.14em; transition:letter-spacing .25s; }
+.nc:hover .nf-link { letter-spacing:.2em; }
+
+/* ─── INTERACTIVE METRICS BAR ────────── */
+.metrics-bar {
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:1px; background:var(--border);
+  border:1px solid var(--border); border-radius:12px; overflow:hidden;
+  margin-top:3rem;
+}
+.metric-cell { background:var(--navy2); padding:2.2rem; text-align:center; transition:background .3s; position:relative; overflow:hidden; }
+.metric-cell::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0,rgba(0,212,200,.08) 0%,transparent 70%);opacity:0;transition:opacity .4s; }
+.metric-cell:hover { background:var(--navy3); }
+.metric-cell:hover::before { opacity:1; }
+.metric-n { font-family:'Syne',sans-serif; font-weight:800; font-size:2.8rem; display:block; line-height:1; background:linear-gradient(135deg,var(--teal2),var(--amber)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.metric-l { font-family:'Syne',sans-serif; font-size:.58rem; font-weight:600; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); margin-top:6px; }
+.metric-sub { font-size:.7rem; color:var(--dim); margin-top:.3rem; }
+
+/* ─── CTA BAND ───────────────────────── */
+.cta-band { position:relative; overflow:hidden; padding:80px 7vw; text-align:center; background:var(--navy2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.cta-band::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse 90% 100% at 50% 50%,rgba(0,212,200,.08) 0%,transparent 65%); }
+.cta-grid-bg { position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,200,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,200,.03) 1px,transparent 1px);background-size:50px 50px;pointer-events:none; }
+.cta-title { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(2rem,4vw,3.8rem); color:var(--text); margin-bottom:1rem; position:relative; z-index:1; }
+.cta-title em { color:var(--teal); font-style:italic; font-family:'Inter',sans-serif; font-weight:200; }
+.cta-sub { font-size:1rem; color:var(--plat); max-width:500px; margin:0 auto 2.5rem; position:relative; z-index:1; }
+.cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; position:relative; z-index:1; }
+
+/* ─── RESPONSIVE ─────────────────────── */
+@media(max-width:1100px) { .inst-grid{grid-template-columns:repeat(2,1fr);}  }
+@media(max-width:900px)  { .about-grid{grid-template-columns:1fr;} .logo-orbital{display:none;} .news-grid{grid-template-columns:1fr;} .h-stats{flex-direction:column;} .hstat{border-right:none;border-bottom:1px solid var(--border);} .metrics-bar{grid-template-columns:1fr 1fr;} }
+@media(max-width:600px)  { .inst-grid{grid-template-columns:1fr;} .metrics-bar{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<div id="cur"></div>
+<div id="curR"></div>
+
+<!-- ══ NAV ══════════════════════════════════════ -->
+<nav id="nav">
+  <a href="index.html" class="logo-wrap">
+    <!-- CARCE SVG Logo — hexagonal circuit mark -->
+    <svg class="logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Outer hex -->
+      <polygon points="50,3 94,27 94,73 50,97 6,73 6,27"
+        stroke="url(#lo1)" stroke-width="1.4" fill="rgba(0,212,200,0.03)"/>
+      <!-- Mid hex -->
+      <polygon points="50,15 83,33 83,67 50,85 17,67 17,33"
+        stroke="url(#lo2)" stroke-width=".9" fill="none" opacity=".45"/>
+      <!-- Vertex dots -->
+      <circle cx="50" cy="3"  r="3.2" fill="#00D4C8"/>
+      <circle cx="94" cy="27" r="3.2" fill="#00D4C8"/>
+      <circle cx="94" cy="73" r="3.2" fill="#FFB830"/>
+      <circle cx="50" cy="97" r="3.2" fill="#FFB830"/>
+      <circle cx="6"  cy="73" r="3.2" fill="#00D4C8"/>
+      <circle cx="6"  cy="27" r="3.2" fill="#00D4C8"/>
+      <!-- Vertex connectors to mid-hex -->
+      <line x1="50" y1="3"  x2="50" y2="15"  stroke="#00D4C8" stroke-width="1.4"/>
+      <line x1="94" y1="27" x2="83" y2="33"  stroke="#00D4C8" stroke-width="1.4"/>
+      <line x1="94" y1="73" x2="83" y2="67"  stroke="#FFB830" stroke-width="1.4"/>
+      <line x1="50" y1="97" x2="50" y2="85"  stroke="#FFB830" stroke-width="1.4"/>
+      <line x1="6"  y1="73" x2="17" y2="67"  stroke="#00D4C8" stroke-width="1.4"/>
+      <line x1="6"  y1="27" x2="17" y2="33"  stroke="#00D4C8" stroke-width="1.4"/>
+      <!-- Inner spokes -->
+      <line x1="50" y1="15" x2="50" y2="33"  stroke="url(#lo1)" stroke-width=".8" opacity=".5"/>
+      <line x1="83" y1="33" x2="66" y2="42"  stroke="url(#lo1)" stroke-width=".8" opacity=".5"/>
+      <line x1="17" y1="33" x2="34" y2="42"  stroke="url(#lo1)" stroke-width=".8" opacity=".5"/>
+      <line x1="50" y1="85" x2="50" y2="67"  stroke="url(#lo2)" stroke-width=".8" opacity=".5"/>
+      <line x1="83" y1="67" x2="66" y2="58"  stroke="url(#lo2)" stroke-width=".8" opacity=".5"/>
+      <line x1="17" y1="67" x2="34" y2="58"  stroke="url(#lo2)" stroke-width=".8" opacity=".5"/>
+      <!-- Core glow circle -->
+      <circle cx="50" cy="50" r="20" fill="url(#lcg)" opacity=".92"/>
+      <!-- Circuit cross -->
+      <line x1="50" y1="34" x2="50" y2="66" stroke="rgba(6,14,30,.85)" stroke-width="2.2"/>
+      <line x1="34" y1="50" x2="66" y2="50" stroke="rgba(6,14,30,.85)" stroke-width="2.2"/>
+      <!-- Diagonal details -->
+      <line x1="40" y1="40" x2="44" y2="44" stroke="rgba(6,14,30,.6)" stroke-width="1.2"/>
+      <line x1="60" y1="40" x2="56" y2="44" stroke="rgba(6,14,30,.6)" stroke-width="1.2"/>
+      <line x1="40" y1="60" x2="44" y2="56" stroke="rgba(6,14,30,.6)" stroke-width="1.2"/>
+      <line x1="60" y1="60" x2="56" y2="56" stroke="rgba(6,14,30,.6)" stroke-width="1.2"/>
+      <!-- Center dot -->
+      <circle cx="50" cy="50" r="5" fill="rgba(6,14,30,.9)"/>
+      <circle cx="50" cy="50" r="2.5" fill="#00D4C8"/>
+      <circle cx="50" cy="50" r="1" fill="white"/>
+      <defs>
+        <linearGradient id="lo1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#00F5E8"/>
+          <stop offset="100%" stop-color="#00D4C8"/>
+        </linearGradient>
+        <linearGradient id="lo2" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#FFD166"/>
+          <stop offset="100%" stop-color="#FFB830"/>
+        </linearGradient>
+        <radialGradient id="lcg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="#00F5E8" stop-opacity=".95"/>
+          <stop offset="50%"  stop-color="#00A89E"/>
+          <stop offset="100%" stop-color="#060E1E" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-wordmark">C<span class="accent">A</span>RCE</span>
+      <span class="logo-tagline">Center for Advanced Research in Computer Engineering</span>
+    </div>
+  </a>
+  <ul class="nlinks">
+    <li><a href="about/index.html">About</a></li>
+    <li><a href="institutes/index.html">Institutes</a></li>
+    <li><a href="research/index.html">Research</a></li>
+    <li><a href="people/index.html">People</a></li>
+    <li><a href="news/index.html">News</a></li>
+    <li><a href="join/index.html" class="nav-cta">Join Us</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HERO ══════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="pcanvas"></canvas>
+  <div class="h-grid"></div>
+  <div class="h-glow" data-parallax=".25"></div>
+  <div class="h-glow2"></div>
+  <div class="h-glow3"></div>
+
+  <div class="hero-inner">
+    <div class="h-badge">
+      <span class="badge-dot"></span>
+      Est. 2010 &nbsp;·&nbsp; Cambridge, MA &nbsp;·&nbsp; 8 Institutes &nbsp;·&nbsp; 24 Labs
+    </div>
+
+    <h1 class="hero-title">
+      <span class="ht1">Center for</span>
+      <span class="ht2">Advanced Research</span>
+      <span class="ht3">in Computer Engineering</span>
+    </h1>
+
+    <div class="h-tw-row">
+      Pioneering&nbsp;
+      <span class="tw-word"
+        data-typewriter='["Artificial Intelligence","Quantum Computing","Cybersecurity","Robotics & Autonomy","Biomedical Computing","Photonics & Semiconductors","Human-Computer Interaction","Sustainable Computing"]'>
+      </span>
+      <span class="tw-cursor">|</span>
+    </div>
+
+    <p class="h-sub">
+      Where foundational science converges with transformative engineering — building the computational systems that will define the next century of human civilization.
+    </p>
+
+    <div class="h-ctas">
+      <a href="institutes/index.html" class="btn-p">Explore Institutes →</a>
+      <a href="research/index.html"   class="btn-s">View Publications</a>
+    </div>
+
+    <div class="h-stats">
+      <div class="hstat" data-tip="Eight research institutes">
+        <span class="hn"><span data-count="8">0</span></span>
+        <span class="hl">Institutes</span>
+      </div>
+      <div class="hstat" data-tip="Twenty-four specialized labs">
+        <span class="hn"><span data-count="24">0</span></span>
+        <span class="hl">Laboratories</span>
+      </div>
+      <div class="hstat" data-tip="320+ active researchers">
+        <span class="hn"><span data-count="320" data-suffix="+">0</span></span>
+        <span class="hl">Researchers</span>
+      </div>
+      <div class="hstat" data-tip="1,847 peer-reviewed papers">
+        <span class="hn"><span data-count="1847">0</span></span>
+        <span class="hl">Publications</span>
+      </div>
+      <div class="hstat" data-tip="$240M in research funding">
+        <span class="hn"><span data-count="240" data-prefix="$" data-suffix="M">0</span></span>
+        <span class="hl">Funding</span>
+      </div>
+      <div class="hstat" data-tip="86 industry partners worldwide">
+        <span class="hn"><span data-count="86">0</span></span>
+        <span class="hl">Partners</span>
+      </div>
+    </div>
+  </div>
+
+  <a href="#about" class="scroll-ind">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span>Scroll</span>
+  </a>
+</section>
+
+<!-- ══ ANNOUNCE BAR ══════════════════════════════ -->
+<div class="abar"><div class="atrack">
+  <span class="aitem"><span class="agem"></span>Breakthrough · 1,000-Qubit Coherence Achieved</span>
+  <span class="aitem"><span class="agem"></span>Careers · 12 Postdoc Positions Open Now</span>
+  <span class="aitem"><span class="agem"></span>Award · Best Paper IEEE S&amp;P 2025</span>
+  <span class="aitem"><span class="agem"></span>Partnership · CERN Collaboration Announced</span>
+  <span class="aitem"><span class="agem"></span>Event · AI Safety Summit — June 2025</span>
+  <span class="aitem"><span class="agem"></span>Grant · $18M NSF Award for Green Computing</span>
+  <span class="aitem"><span class="agem"></span>Publication · Nature Photonics — All-Optical NN</span>
+  <span class="aitem"><span class="agem"></span>Breakthrough · 1,000-Qubit Coherence Achieved</span>
+  <span class="aitem"><span class="agem"></span>Careers · 12 Postdoc Positions Open Now</span>
+  <span class="aitem"><span class="agem"></span>Award · Best Paper IEEE S&amp;P 2025</span>
+  <span class="aitem"><span class="agem"></span>Partnership · CERN Collaboration Announced</span>
+  <span class="aitem"><span class="agem"></span>Event · AI Safety Summit — June 2025</span>
+  <span class="aitem"><span class="agem"></span>Grant · $18M NSF Award for Green Computing</span>
+  <span class="aitem"><span class="agem"></span>Publication · Nature Photonics — All-Optical NN</span>
+</div></div>
+
+<!-- ══ ABOUT ══════════════════════════════════════ -->
+<div class="sw" id="about">
+  <div class="about-grid">
+    <div>
+      <p class="ew">About CARCE</p>
+      <h2 class="sh">Advancing the <em>Frontier</em><br>of Computing</h2>
+      <div class="orn"><div class="orn-gem"></div></div>
+      <p class="si2">CARCE unites engineers, scientists, and visionaries to solve the defining technical challenges of our era — with rigor, integrity, and an unwavering commitment to humanity's benefit across eight specialized institutes.</p>
+      <div class="pillars-grid sr">
+        <div class="pillar"><span class="pil-i">🔬</span><div class="pil-n">Fundamental Research</div><div class="pil-d">Long-horizon science unconstrained by short-term deliverables</div></div>
+        <div class="pillar"><span class="pil-i">⚡</span><div class="pil-n">Applied Engineering</div><div class="pil-d">Translating breakthroughs into real-world systems</div></div>
+        <div class="pillar"><span class="pil-i">🤝</span><div class="pil-n">Industry Partnership</div><div class="pil-d">Deep ties with 86 leading global organizations</div></div>
+        <div class="pillar"><span class="pil-i">🌍</span><div class="pil-n">Open Science</div><div class="pil-d">Freely shared research for humanity's benefit</div></div>
+      </div>
+      <div style="margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="about/index.html" class="btn-p">Learn More →</a>
+        <a href="people/index.html" class="btn-s">Meet the Team</a>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center">
+      <div class="logo-orbital">
+        <div class="orb-ring"></div>
+        <div class="orb-ring"></div>
+        <div class="orb-ring"></div>
+        <!-- Large centered logo -->
+        <div class="orb-center">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 24px rgba(0,212,200,.5))">
+            <polygon points="50,3 94,27 94,73 50,97 6,73 6,27" stroke="url(#ao1)" stroke-width="1.4" fill="rgba(0,212,200,0.05)"/>
+            <polygon points="50,15 83,33 83,67 50,85 17,67 17,33" stroke="url(#ao2)" stroke-width=".9" fill="none" opacity=".5"/>
+            <line x1="50" y1="3"  x2="50" y2="15"  stroke="#00D4C8" stroke-width="1.5"/>
+            <line x1="94" y1="27" x2="83" y2="33"  stroke="#00D4C8" stroke-width="1.5"/>
+            <line x1="94" y1="73" x2="83" y2="67"  stroke="#FFB830" stroke-width="1.5"/>
+            <line x1="50" y1="97" x2="50" y2="85"  stroke="#FFB830" stroke-width="1.5"/>
+            <line x1="6"  y1="73" x2="17" y2="67"  stroke="#00D4C8" stroke-width="1.5"/>
+            <line x1="6"  y1="27" x2="17" y2="33"  stroke="#00D4C8" stroke-width="1.5"/>
+            <circle cx="50" cy="3"  r="3.5" fill="#00D4C8" style="filter:drop-shadow(0 0 4px #00D4C8)"/>
+            <circle cx="94" cy="27" r="3.5" fill="#00D4C8"/>
+            <circle cx="94" cy="73" r="3.5" fill="#FFB830" style="filter:drop-shadow(0 0 4px #FFB830)"/>
+            <circle cx="50" cy="97" r="3.5" fill="#FFB830"/>
+            <circle cx="6"  cy="73" r="3.5" fill="#00D4C8"/>
+            <circle cx="6"  cy="27" r="3.5" fill="#00D4C8"/>
+            <circle cx="50" cy="50" r="22" fill="url(#aoc)"/>
+            <line x1="50" y1="34" x2="50" y2="66" stroke="rgba(6,14,30,.8)" stroke-width="2.5"/>
+            <line x1="34" y1="50" x2="66" y2="50" stroke="rgba(6,14,30,.8)" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="5.5" fill="rgba(6,14,30,.9)"/>
+            <circle cx="50" cy="50" r="3"   fill="#00D4C8"/>
+            <circle cx="50" cy="50" r="1.2" fill="white"/>
+            <defs>
+              <linearGradient id="ao1" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#00F5E8"/><stop offset="100%" stop-color="#00D4C8"/></linearGradient>
+              <linearGradient id="ao2" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFD166"/><stop offset="100%" stop-color="#FFB830"/></linearGradient>
+              <radialGradient id="aoc" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#00F5E8" stop-opacity=".95"/><stop offset="50%" stop-color="#00A89E"/><stop offset="100%" stop-color="#060E1E" stop-opacity="0"/></radialGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ INSTITUTES ═════════════════════════════════ -->
+<div class="swa">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem">
+    <div><p class="ew">Research Institutes</p><h2 class="sh">Eight Pillars of <em>Discovery</em></h2></div>
+    <a href="institutes/index.html" class="btn-s">All Institutes →</a>
+  </div>
+  <div class="inst-grid">
+    <a class="ic sr tilt glow-card" href="institutes/ai-ml.html" style="--ic-c:#00D4C8"><div class="ic-shine"></div><div class="ic-num">Institute · 01</div><span class="ic-sym">🧠</span><div class="ic-name">Artificial Intelligence &amp; Machine Learning</div><div class="ic-desc">Deep learning, foundation models, AI safety and alignment at scale.</div><div class="ic-chips"><span class="ic-chip">Deep Learning</span><span class="ic-chip">AI Safety</span><span class="ic-chip">NLP</span></div><span class="ic-go">Visit →</span></a>
+    <a class="ic sr tilt glow-card" href="institutes/quantum.html" style="--ic-c:#A78BFA"><div class="ic-shine"></div><div class="ic-num">Institute · 02</div><span class="ic-sym">⚛️</span><div class="ic-name">Quantum Computing &amp; Information Science</div><div class="ic-desc">Quantum algorithms, error correction, photonic systems.</div><div class="ic-chips"><span class="ic-chip">Algorithms</span><span class="ic-chip">Photonics</span><span class="ic-chip">Error Correction</span></div><span class="ic-go">Visit →</span></a>
+    <a class="ic sr tilt glow-card" href="institutes/cybersecurity.html" style="--ic-c:#F87171"><div class="ic-shine"></div><div class="ic-num">Institute · 03</div><span class="ic-sym">🔐</span><div class="ic-name">Cybersecurity &amp; Cryptography</div><div class="ic-desc">Post-quantum crypto, hardware security, network defense.</div><div class="ic-chips"><span class="ic-chip">Post-Quantum</span><span class="ic-chip">ZK Proofs</span><span class="ic-chip">HW Security</span></div><span class="ic-go">Visit →</span></a>
+    <a class="ic sr tilt glow-card" href="institutes/robotics.html" style="--ic-c:#34D399"><div class="ic-shine"></div><div class="ic-num">Institute · 04</div><span class="ic-sym">🤖</span><div class="ic-name">Robotics &amp; Autonomous Systems</div><div class="ic-desc">Embodied AI, soft robotics, autonomous vehicles &amp; swarms.</div><div class="ic-chips"><span class="ic-chip">Embodied AI</span><span class="ic-chip">Autonomy</span><span class="ic-chip">Swarms</span></div><span class="ic-go">Visit →</span></a>
+    <a class="ic sr tilt glow-card" href="institutes/biomedical.html" style="--ic-c:#FBBF24"><div class="ic-shine"></div><div class="ic-num">Institute · 05</div><span class="ic-sym">🧬</span><div class="ic-name">Biomedical &amp; Health Computing</div><div class="ic-desc">Genomics, AI diagnostics, brain-computer interfaces.</div><div class="ic-chips"><span class="ic-chip">Genomics</span><span class="ic-chip">BCI</span><span class="ic-chip">Medical AI</span></div><span class="ic-go">Visit →</span></a>
+    <a class="ic sr tilt glow-card" href="institutes/photonics.html" style="--ic-c:#38BDF8"><div class="ic-shine"></div><div class="ic-num">Institute · 06</div><span class="ic-sym">💡</span><div class="ic-name">Photonics &amp; Semiconductor Engineering</div><div class="ic-desc">Silicon photonics, 2D materials, integrated circuits.</div><div class="ic-chips"><span class="ic-chip">Photonics</span><span class="ic-chip">2D Materials</span><span class="ic-chip">VLSI</span></div><span class="ic-go">Visit →</span></a>
+    <a class="ic sr tilt glow-card" href="institutes/hci.html" style="--ic-c:#F472B6"><div class="ic-shine"></div><div class="ic-num">Institute · 07</div><span class="ic-sym">🌐</span><div class="ic-name">Human-Computer Interaction &amp; XR</div><div class="ic-desc">Spatial computing, haptics, immersive XR environments.</div><div class="ic-chips"><span class="ic-chip">Spatial</span><span class="ic-chip">Haptics</span><span class="ic-chip">XR</span></div><span class="ic-go">Visit →</span></a>
+    <a class="ic sr tilt glow-card" href="institutes/climate.html" style="--ic-c:#4ADE80"><div class="ic-shine"></div><div class="ic-num">Institute · 08</div><span class="ic-sym">🌿</span><div class="ic-name">Climate &amp; Sustainable Computing</div><div class="ic-desc">Carbon-aware computation, energy-efficient architectures.</div><div class="ic-chips"><span class="ic-chip">Carbon-Aware</span><span class="ic-chip">Climate AI</span><span class="ic-chip">Green Arch</span></div><span class="ic-go">Visit →</span></a>
+  </div>
+</div>
+
+<!-- ══ METRICS BAR ═════════════════════════════════ -->
+<div class="sw" style="padding-top:0">
+  <div class="metrics-bar sr">
+    <div class="metric-cell"><span class="metric-n"><span data-count="94" data-suffix="k+">0</span></span><div class="metric-l">Total Citations</div><div class="metric-sub">H-index 142 across institutes</div></div>
+    <div class="metric-cell"><span class="metric-n"><span data-count="312">0</span></span><div class="metric-l">Patents Filed</div><div class="metric-sub">Across 28 technology domains</div></div>
+    <div class="metric-cell"><span class="metric-n"><span data-count="48">0</span></span><div class="metric-l">Spin-off Companies</div><div class="metric-sub">Combined valuation $4.2B</div></div>
+    <div class="metric-cell"><span class="metric-n"><span data-count="47">0</span></span><div class="metric-l">Nations Represented</div><div class="metric-sub">Among our 320+ researchers</div></div>
+  </div>
+</div>
+
+<!-- ══ RESEARCH TABS ══════════════════════════════ -->
+<div class="swa">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1rem;flex-wrap:wrap;gap:1rem">
+    <div><p class="ew">Publications &amp; Research</p><h2 class="sh">Recent <em>Breakthroughs</em></h2></div>
+    <a href="research/index.html" class="btn-s">All Publications →</a>
+  </div>
+  <div data-tabs>
+    <div class="tab-row">
+      <button class="tab-btn active" data-target="all">All</button>
+      <button class="tab-btn" data-target="ai">AI &amp; ML</button>
+      <button class="tab-btn" data-target="quantum">Quantum</button>
+      <button class="tab-btn" data-target="cyber">Cybersecurity</button>
+      <button class="tab-btn" data-target="bio">Biomedical</button>
+    </div>
+    <div class="tab-pane active" data-tab="all">
+      <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Scalable Fault-Tolerant Quantum Error Correction via Topological Surface Codes at Finite Temperature</div><div class="pa">Chen, L. · Okafor, A. · Petrov, I. · et al. · Institute 02</div><div class="pj">Nature Quantum Information, Vol. 11, 2025</div><span class="paw">Featured Article</span></div></div>
+      <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Constitutional AI at Scale: Aligning Foundation Models Without Human Preference Labeling</div><div class="pa">Williams, S. · Nakamura, Y. · Al-Rashid, F. · Institute 01</div><div class="pj">ICML 2025</div><span class="paw">Outstanding Paper Award</span></div></div>
+      <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Post-Quantum Lattice Cryptography on Constrained Embedded Systems: A Hardware-Software Co-Design</div><div class="pa">Moreira, T. · Singh, R. · Zhao, P. · Institute 03</div><div class="pj">IEEE S&amp;P 2025</div><span class="paw">Best Paper</span></div></div>
+      <div class="pub-entry sr"><div class="pyr">2024</div><div><div class="pt">All-Optical Deep Neural Networks via Silicon Photonic Circuits: 100 TOPS at 1 pJ/op</div><div class="pa">Park, J. · Nair, P. · Hu, X. · Institute 06</div><div class="pj">Nature Photonics, Vol. 18, 2024</div></div></div>
+    </div>
+    <div class="tab-pane" data-tab="ai" style="opacity:0">
+      <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Constitutional AI at Scale: Aligning Foundation Models Without Human Preference Labeling</div><div class="pa">Williams, S. · Nakamura, Y. · Al-Rashid, F. · ASAL Lab</div><div class="pj">ICML 2025</div><span class="paw">Outstanding Paper</span></div></div>
+      <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Sparse Mixture-of-Experts at Scale: Training 1T Parameter Models Efficiently</div><div class="pa">Williams, S. · Chen, X. · DLF Lab</div><div class="pj">NeurIPS 2025</div></div></div>
+    </div>
+    <div class="tab-pane" data-tab="quantum" style="opacity:0">
+      <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Scalable Fault-Tolerant Quantum Error Correction via Topological Surface Codes</div><div class="pa">Chen, L. · Okafor, A. · Petrov, I. · QEC Lab</div><div class="pj">Nature Quantum Information 2025</div><span class="paw">Featured Article</span></div></div>
+      <div class="pub-entry sr"><div class="pyr">2024</div><div><div class="pt">Variational Quantum Eigensolver with Improved Classical Optimization on NISQ Devices</div><div class="pa">Chen, L. · QAC Lab</div><div class="pj">Physical Review Letters 2024</div></div></div>
+    </div>
+    <div class="tab-pane" data-tab="cyber" style="opacity:0">
+      <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Post-Quantum Lattice Cryptography on Constrained Embedded Systems</div><div class="pa">Moreira, T. · Singh, R. · Zhao, P. · CPL Lab</div><div class="pj">IEEE S&amp;P 2025</div><span class="paw">Best Paper</span></div></div>
+      <div class="pub-entry sr"><div class="pyr">2024</div><div><div class="pt">Certified Robustness via Randomized Smoothing at Scale</div><div class="pa">Zhao, P. · AMND Lab</div><div class="pj">CCS 2024</div></div></div>
+    </div>
+    <div class="tab-pane" data-tab="bio" style="opacity:0">
+      <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Foundation Models for Genomics: Pre-training on 10 Billion Base Pairs for Variant Effect Prediction</div><div class="pa">Hassan, D. · Lee, M. · Björk, E. · CGSB Lab</div><div class="pj">Nature Methods 2025</div><span class="paw">Editor's Pick</span></div></div>
+      <div class="pub-entry sr"><div class="pyr">2024</div><div><div class="pt">Spatially Adaptive XR for Motor Rehabilitation: A Randomised Clinical Trial</div><div class="pa">Hassan, D. · Björk, E. · Torres, E. · Institutes 05 &amp; 07</div><div class="pj">The Lancet Digital Health 2024</div><span class="paw">Editor's Choice</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ NEWS ════════════════════════════════════════ -->
+<div class="sw">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:.5rem;flex-wrap:wrap;gap:1rem">
+    <div><p class="ew">News &amp; Events</p><h2 class="sh">Latest from <em>CARCE</em></h2></div>
+    <a href="news/index.html" class="btn-s">All News →</a>
+  </div>
+  <div class="news-grid">
+    <a class="nc lead sr" href="news/quantum-milestone.html">
+      <div class="nth" style="background:linear-gradient(135deg,#0d0822,#180e38)">⚛️<div class="nth-over"></div></div>
+      <div class="nb"><div class="nk">Breakthrough · March 2025</div><div class="nt">CARCE Achieves 1,000-Qubit Logical Coherence Milestone with CERN</div><div class="nbl">Researchers at Institute 02 demonstrate sustained coherence of a 1,000-qubit logical register at near-room temperature — a turning point for practical quantum computation.</div><div class="nf"><span>Institute 02</span><span class="nf-link">Read More →</span></div></div>
+    </a>
+    <a class="nc sr" href="news/nsf-grant.html">
+      <div class="nth" style="background:linear-gradient(135deg,#071612,#0d2416)">🌿<div class="nth-over"></div></div>
+      <div class="nb"><div class="nk">Award · Feb 2025</div><div class="nt">$18M NSF Grant for Sustainable Computing</div><div class="nbl">Five-year grant funds new carbon-aware computing facility at Institute 08.</div><div class="nf"><span>Institute 08</span><span class="nf-link">Read →</span></div></div>
+    </a>
+    <a class="nc sr" href="news/ai-summit.html">
+      <div class="nth" style="background:linear-gradient(135deg,#1a1000,#281c00)">🏆<div class="nth-over"></div></div>
+      <div class="nb"><div class="nk">Event · June 2025</div><div class="nt">International AI Safety Summit at CARCE</div><div class="nbl">Leading researchers and policymakers convene on frontier model alignment.</div><div class="nf"><span>Institute 01</span><span class="nf-link">Register →</span></div></div>
+    </a>
+  </div>
+</div>
+
+<!-- ══ CTA BAND ════════════════════════════════════ -->
+<div class="cta-band">
+  <div class="cta-grid-bg"></div>
+  <h2 class="cta-title sr">Ready to Push the <em>Boundaries?</em></h2>
+  <p class="cta-sub sr">Join 320+ researchers from 47 countries working on the problems that matter most to humanity's future.</p>
+  <div class="cta-btns sr">
+    <a href="join/index.html" class="btn-p">Explore Open Positions</a>
+    <a href="about/index.html" class="btn-s">Learn About CARCE</a>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══════════════════════════════════════ -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-wm">C<span class="accent">A</span>RCE</div>
+      <div class="ft-tag">Engineering the systems that define the next century.</div>
+      <div class="ft-desc">Center for Advanced Research in Computer Engineering. Eight institutes · 24 laboratories · 320+ researchers across 47 nations.</div>
+      <div class="ft-soc">
+        <a class="soc-btn" href="#" data-tip="Twitter / X">𝕏</a>
+        <a class="soc-btn" href="#" data-tip="GitHub">⌥</a>
+        <a class="soc-btn" href="#" data-tip="LinkedIn">in</a>
+        <a class="soc-btn" href="#" data-tip="arXiv">∂</a>
+        <a class="soc-btn" href="#" data-tip="YouTube">▶</a>
+      </div>
+    </div>
+    <div class="ft-col"><h4>Research</h4><ul class="ft-nav"><li><a href="institutes/index.html">All Institutes</a></li><li><a href="research/index.html">Publications</a></li><li><a href="research/index.html">Datasets</a></li><li><a href="research/index.html">Patents</a></li><li><a href="research/index.html">Open Source</a></li></ul></div>
+    <div class="ft-col"><h4>Community</h4><ul class="ft-nav"><li><a href="people/index.html">Our Team</a></li><li><a href="news/index.html">News</a></li><li><a href="news/index.html">Events</a></li><li><a href="news/index.html">Blog</a></li><li><a href="news/index.html">Seminars</a></li></ul></div>
+    <div class="ft-col"><h4>Organization</h4><ul class="ft-nav"><li><a href="about/index.html">About CARCE</a></li><li><a href="join/index.html">Careers</a></li><li><a href="about/index.html">Partners</a></li><li><a href="about/index.html">Press Kit</a></li><li><a href="about/index.html">Contact</a></li></ul></div>
+  </div>
+  <div class="ft-bot">
+    <span>© 2025 Center for Advanced Research in Computer Engineering. All rights reserved.</span>
+    <span>Privacy Policy · Terms of Use · Accessibility</span>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

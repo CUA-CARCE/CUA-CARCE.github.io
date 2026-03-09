@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>All Institutes — CARCE</title>
+<link rel="stylesheet" href="../shared.css">
+<style>
+.inst-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3rem}
+.inst-card{border:1px solid var(--border);background:var(--ink2);overflow:hidden;position:relative;transition:border-color .3s,transform .3s;cursor:none}
+.inst-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(to bottom,transparent,var(--ic,var(--gold)),transparent);transform:scaleY(0);transform-origin:center;transition:transform .4s}
+.inst-card:hover{border-color:rgba(201,168,76,.4);transform:translateY(-3px)}.inst-card:hover::before{transform:scaleY(1)}
+.inst-card-head{padding:2rem 2rem 1.2rem;border-bottom:1px solid var(--border)}
+.inst-num{font-size:.52rem;letter-spacing:.22em;text-transform:uppercase;color:var(--dim);margin-bottom:.8rem}
+.inst-emoji{font-size:2rem;display:block;margin-bottom:.8rem}
+.inst-name{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;line-height:1.3;margin-bottom:.4rem}
+.inst-name a{color:var(--text);text-decoration:none;transition:color .2s}.inst-name a:hover{color:var(--gold)}
+.inst-tagline{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.88rem;color:var(--gold)}
+.inst-card-body{padding:1.5rem 2rem 2rem}
+.inst-desc{font-size:.76rem;color:var(--muted);line-height:1.68;margin-bottom:1.2rem}
+.inst-labs-head{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.inst-labs-list{list-style:none;margin-bottom:1.4rem}
+.inst-labs-list li{padding:.35rem 0;border-bottom:1px solid rgba(201,168,76,.07);font-size:.76rem}
+.inst-labs-list li:last-child{border-bottom:none}
+.inst-labs-list a{color:var(--muted);text-decoration:none;transition:color .2s;display:flex;align-items:center;gap:8px}
+.inst-labs-list a::before{content:'›';color:var(--gold-dk)}
+.inst-labs-list a:hover{color:var(--gold-lt)}
+.inst-cta{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:color .2s}
+.inst-cta:hover{color:var(--gold-lt)}
+@media(max-width:900px){.inst-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="cur-r" id="curR"></div><nav id="nav">
+  <a href="../index.html" class="nlogo">
+    <span class="nlogo-m">CARCE</span>
+    <span class="nlogo-s">Center for Advanced Research in Computer Engineering</span>
+  </a>
+  <ul class="nlinks">
+    <li><a href="../about/index.html">About</a></li>
+    <li><a href="../institutes/index.html">Institutes</a></li>
+    <li><a href="../research/index.html">Research</a></li>
+    <li><a href="../people/index.html">People</a></li>
+    <li><a href="../news/index.html">News</a></li>
+    <li><a href="../join/index.html" class="ncta">Join Us</a></li>
+  </ul>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-cur">Institutes</span></div>
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="page-hero-glow"></div>
+  <p class="page-eyebrow">Research Institutes</p>
+  <h1 class="page-title">Eight Pillars of <em>Discovery</em></h1>
+  <p class="page-sub">Each institute operates with full scientific autonomy, united by CARCE's shared infrastructure and collaborative culture of excellence.</p>
+</div><div class="abar"><div class="atrack"><span class="aitem"><span class="agem"></span>New · CARCE Quantum Initiative 2025</span><span class="aitem"><span class="agem"></span>Careers · 12 Postdoctoral Positions Open</span><span class="aitem"><span class="agem"></span>Award · Best Paper IEEE S&amp;P 2025</span><span class="aitem"><span class="agem"></span>Collab · Partnership with CERN Announced</span><span class="aitem"><span class="agem"></span>Event · AI Safety Summit — June 2025</span><span class="aitem"><span class="agem"></span>Grant · $18M NSF Award for Green Computing</span><span class="aitem"><span class="agem"></span>New · CARCE Quantum Initiative 2025</span><span class="aitem"><span class="agem"></span>Careers · 12 Postdoctoral Positions Open</span><span class="aitem"><span class="agem"></span>Award · Best Paper IEEE S&amp;P 2025</span><span class="aitem"><span class="agem"></span>Collab · Partnership with CERN Announced</span><span class="aitem"><span class="agem"></span>Event · AI Safety Summit — June 2025</span><span class="aitem"><span class="agem"></span>Grant · $18M NSF Award for Green Computing</span></div></div><div class="sw"><div class="inst-grid">
+    <div class="inst-card sr" style="--ic:#C9A84C">
+      <div class="inst-card-head">
+        <div class="inst-num">Institute · 01</div>
+        <span class="inst-emoji">🧠</span>
+        <h3 class="inst-name"><a href="ai-ml.html">Artificial Intelligence &amp; Machine Learning</a></h3>
+        <p class="inst-tagline">Intelligence by Design</p>
+      </div>
+      <div class="inst-card-body">
+        <p class="inst-desc">The Institute for AI &amp; Machine Learning advances the science of intelligent systems — from deep learning theory to safe, aligned AI deployable at civilizational scale. Our three laboratories cover…</p>
+        <div class="inst-labs-head">Laboratories</div>
+        <ul class="inst-labs-list"><li><a href="../labs/ai-ml/deep-learning.html">Deep Learning Foundations Lab</a></li><li><a href="../labs/ai-ml/ai-safety.html">AI Safety &amp; Alignment Laboratory</a></li><li><a href="../labs/ai-ml/nlp-vision.html">Language, Vision &amp; Multimodal Lab</a></li></ul>
+        <a href="ai-ml.html" class="inst-cta">Visit Institute →</a>
+      </div>
+    </div>
+    <div class="inst-card sr" style="--ic:#B8A0E8">
+      <div class="inst-card-head">
+        <div class="inst-num">Institute · 02</div>
+        <span class="inst-emoji">⚛️</span>
+        <h3 class="inst-name"><a href="quantum.html">Quantum Computing &amp; Information Science</a></h3>
+        <p class="inst-tagline">Harnessing the Quantum Advantage</p>
+      </div>
+      <div class="inst-card-body">
+        <p class="inst-desc">The Institute for Quantum Computing &amp; Information Science pushes the frontiers of quantum hardware, algorithms, and theory. From superconducting qubits to photonic networks, our three laboratories…</p>
+        <div class="inst-labs-head">Laboratories</div>
+        <ul class="inst-labs-list"><li><a href="../labs/quantum/quantum-hardware.html">Quantum Hardware &amp; Devices Lab</a></li><li><a href="../labs/quantum/quantum-algorithms.html">Quantum Algorithms &amp; Complexity Lab</a></li><li><a href="../labs/quantum/quantum-error.html">Quantum Error Correction Laboratory</a></li></ul>
+        <a href="quantum.html" class="inst-cta">Visit Institute →</a>
+      </div>
+    </div>
+    <div class="inst-card sr" style="--ic:#E87070">
+      <div class="inst-card-head">
+        <div class="inst-num">Institute · 03</div>
+        <span class="inst-emoji">🔐</span>
+        <h3 class="inst-name"><a href="cybersecurity.html">Cybersecurity &amp; Cryptography</a></h3>
+        <p class="inst-tagline">Securing the Digital Civilization</p>
+      </div>
+      <div class="inst-card-body">
+        <p class="inst-desc">The Institute for Cybersecurity &amp; Cryptography develops the theoretical and practical foundations of secure computing in a post-quantum world. Our laboratories address cryptographic protocols, har…</p>
+        <div class="inst-labs-head">Laboratories</div>
+        <ul class="inst-labs-list"><li><a href="../labs/cybersecurity/cryptography.html">Cryptographic Protocols Laboratory</a></li><li><a href="../labs/cybersecurity/hardware-security.html">Hardware Security &amp; Trusted Systems Lab</a></li><li><a href="../labs/cybersecurity/adversarial-ml.html">Adversarial ML &amp; Network Defense Lab</a></li></ul>
+        <a href="cybersecurity.html" class="inst-cta">Visit Institute →</a>
+      </div>
+    </div>
+    <div class="inst-card sr" style="--ic:#70C8A0">
+      <div class="inst-card-head">
+        <div class="inst-num">Institute · 04</div>
+        <span class="inst-emoji">🤖</span>
+        <h3 class="inst-name"><a href="robotics.html">Robotics &amp; Autonomous Systems</a></h3>
+        <p class="inst-tagline">Machines that Think, Feel, and Act</p>
+      </div>
+      <div class="inst-card-body">
+        <p class="inst-desc">The Institute for Robotics &amp; Autonomous Systems pioneers embodied intelligence — from dexterous manipulation to self-driving systems operating in open-world environments. Our laboratories span the…</p>
+        <div class="inst-labs-head">Laboratories</div>
+        <ul class="inst-labs-list"><li><a href="../labs/robotics/embodied-ai.html">Embodied AI &amp; Manipulation Laboratory</a></li><li><a href="../labs/robotics/autonomous-vehicles.html">Autonomous Vehicles &amp; Navigation Lab</a></li><li><a href="../labs/robotics/multi-agent.html">Multi-Agent &amp; Swarm Robotics Lab</a></li></ul>
+        <a href="robotics.html" class="inst-cta">Visit Institute →</a>
+      </div>
+    </div>
+    <div class="inst-card sr" style="--ic:#E8C070">
+      <div class="inst-card-head">
+        <div class="inst-num">Institute · 05</div>
+        <span class="inst-emoji">🧬</span>
+        <h3 class="inst-name"><a href="biomedical.html">Biomedical &amp; Health Computing</a></h3>
+        <p class="inst-tagline">Computing at the Interface of Life</p>
+      </div>
+      <div class="inst-card-body">
+        <p class="inst-desc">The Institute for Biomedical &amp; Health Computing bridges computational science and medicine to transform how we understand, diagnose, and treat disease. Three specialized laboratories advance genom…</p>
+        <div class="inst-labs-head">Laboratories</div>
+        <ul class="inst-labs-list"><li><a href="../labs/biomedical/genomics.html">Computational Genomics &amp; Systems Biology Lab</a></li><li><a href="../labs/biomedical/bci.html">Brain-Computer Interface Laboratory</a></li><li><a href="../labs/biomedical/clinical-ai.html">Clinical AI &amp; Medical Imaging Laboratory</a></li></ul>
+        <a href="biomedical.html" class="inst-cta">Visit Institute →</a>
+      </div>
+    </div>
+    <div class="inst-card sr" style="--ic:#70B0E8">
+      <div class="inst-card-head">
+        <div class="inst-num">Institute · 06</div>
+        <span class="inst-emoji">💡</span>
+        <h3 class="inst-name"><a href="photonics.html">Photonics &amp; Semiconductor Engineering</a></h3>
+        <p class="inst-tagline">Engineering Light and Matter</p>
+      </div>
+      <div class="inst-card-body">
+        <p class="inst-desc">The Institute for Photonics &amp; Semiconductor Engineering advances the physical substrates of computation — from silicon photonic interconnects to atomically-thin transistors. Our laboratories span …</p>
+        <div class="inst-labs-head">Laboratories</div>
+        <ul class="inst-labs-list"><li><a href="../labs/photonics/silicon-photonics.html">Silicon Photonics &amp; Integrated Optics Lab</a></li><li><a href="../labs/photonics/2d-materials.html">2D Materials &amp; Quantum Devices Lab</a></li><li><a href="../labs/photonics/vlsi-design.html">VLSI Design &amp; Electronic-Photonic Co-Design Lab</a></li></ul>
+        <a href="photonics.html" class="inst-cta">Visit Institute →</a>
+      </div>
+    </div>
+    <div class="inst-card sr" style="--ic:#E890C8">
+      <div class="inst-card-head">
+        <div class="inst-num">Institute · 07</div>
+        <span class="inst-emoji">🌐</span>
+        <h3 class="inst-name"><a href="hci.html">Human-Computer Interaction &amp; Extended Reality</a></h3>
+        <p class="inst-tagline">Designing the Human-Machine Interface</p>
+      </div>
+      <div class="inst-card-body">
+        <p class="inst-desc">The Institute for HCI &amp; Extended Reality designs the next generation of human-machine interfaces — from spatial computing to haptic feedback to accessible, emotionally-aware systems. Three labs co…</p>
+        <div class="inst-labs-head">Laboratories</div>
+        <ul class="inst-labs-list"><li><a href="../labs/hci/spatial-computing.html">Spatial Computing &amp; XR Laboratory</a></li><li><a href="../labs/hci/haptics.html">Haptics &amp; Tactile Interfaces Laboratory</a></li><li><a href="../labs/hci/accessible-hci.html">Accessible &amp; Affective Computing Lab</a></li></ul>
+        <a href="hci.html" class="inst-cta">Visit Institute →</a>
+      </div>
+    </div>
+    <div class="inst-card sr" style="--ic:#78C878">
+      <div class="inst-card-head">
+        <div class="inst-num">Institute · 08</div>
+        <span class="inst-emoji">🌿</span>
+        <h3 class="inst-name"><a href="climate.html">Climate &amp; Sustainable Computing</a></h3>
+        <p class="inst-tagline">Computing in Service of the Planet</p>
+      </div>
+      <div class="inst-card-body">
+        <p class="inst-desc">The Institute for Climate &amp; Sustainable Computing addresses the dual challenge of greening computation and leveraging computation to address climate change. Three labs tackle energy efficiency, cl…</p>
+        <div class="inst-labs-head">Laboratories</div>
+        <ul class="inst-labs-list"><li><a href="../labs/climate/green-architecture.html">Green Computer Architecture Laboratory</a></li><li><a href="../labs/climate/climate-ai.html">AI for Climate Science Laboratory</a></li><li><a href="../labs/climate/sustainable-datacenter.html">Sustainable Data Center &amp; Systems Lab</a></li></ul>
+        <a href="climate.html" class="inst-cta">Visit Institute →</a>
+      </div>
+    </div></div></div><footer>
+  <div class="ftop">
+    <div>
+      <div class="fwm">CARCE</div>
+      <div class="ftag">Engineering the systems that define the next century.</div>
+      <div class="orn" style="justify-content:flex-start;margin:1rem 0"><div class="orn-d"></div></div>
+      <div class="fdesc">Center for Advanced Research in Computer Engineering. Eight institutes. 320+ researchers across 47 nations.</div>
+    </div>
+    <div class="fcol"><h4>Research</h4><ul class="fnav"><li><a href="../institutes/index.html">All Institutes</a></li><li><a href="../research/index.html">Publications</a></li><li><a href="../research/index.html">Datasets</a></li><li><a href="../research/index.html">Patents</a></li></ul></div>
+    <div class="fcol"><h4>Community</h4><ul class="fnav"><li><a href="../people/index.html">Our Team</a></li><li><a href="../news/index.html">News</a></li><li><a href="../news/index.html">Events</a></li><li><a href="../news/index.html">Blog</a></li></ul></div>
+    <div class="fcol"><h4>Organization</h4><ul class="fnav"><li><a href="../about/index.html">About CARCE</a></li><li><a href="../join/index.html">Careers</a></li><li><a href="../about/index.html">Partners</a></li><li><a href="../about/index.html">Contact</a></li></ul></div>
+  </div>
+  <div class="fbot">
+    <span>© 2025 Center for Advanced Research in Computer Engineering. All rights reserved.</span>
+    <span>Privacy · Terms · Accessibility</span>
+  </div>
+</footer><script src="../shared.js"></script>
+</body>
+</html>

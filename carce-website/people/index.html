@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>People — CARCE</title>
+<link rel="stylesheet" href="../shared.css">
+<style>
+.people-filter{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.pf-btn{font-size:.57rem;letter-spacing:.16em;text-transform:uppercase;padding:6px 16px;border:1px solid var(--border);color:var(--muted);cursor:none;transition:all .2s;background:none}
+.pf-btn:hover,.pf-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06)}
+.people-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.person-card{border:1px solid var(--border);background:var(--ink2);padding:1.8rem 1.4rem;text-align:center;transition:all .3s;cursor:none;position:relative;overflow:hidden}
+.person-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transform:scaleX(0);transition:transform .4s}
+.person-card:hover{background:var(--ink3);transform:translateY(-4px)}.person-card:hover::after{transform:scaleX(1)}
+.pmono{width:64px;height:64px;border-radius:50%;margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.3rem;letter-spacing:.05em;color:var(--gold-lt);background:var(--ink3);border:1px solid var(--border)}
+.pname{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1rem;color:var(--text);margin-bottom:.25rem}
+.prole{font-size:.57rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
+.pinst{font-size:.65rem;color:var(--muted);margin-bottom:.5rem}
+.ppubs{font-size:.6rem;color:var(--dim);letter-spacing:.1em}
+.section-divide{border:none;border-top:1px solid var(--border);margin:3rem 0}
+@media(max-width:1100px){.people-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:700px){.people-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.people-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-r" id="curR"></div>
+<nav id="nav">
+  <a href="../index.html" class="nlogo"><span class="nlogo-m">CARCE</span><span class="nlogo-s">Center for Advanced Research in Computer Engineering</span></a>
+  <ul class="nlinks">
+    <li><a href="../about/index.html">About</a></li>
+    <li><a href="../institutes/index.html">Institutes</a></li>
+    <li><a href="../research/index.html">Research</a></li>
+    <li><a href="index.html" class="active">People</a></li>
+    <li><a href="../news/index.html">News</a></li>
+    <li><a href="../join/index.html" class="ncta">Join Us</a></li>
+  </ul>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-cur">People</span></div>
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="page-hero-glow"></div>
+  <p class="page-eyebrow">Our People</p>
+  <h1 class="page-title">World-Class <em>Research Team</em></h1>
+  <p class="page-sub">320+ researchers from 47 countries, united by a passion for computing's deepest and most consequential questions.</p>
+</div>
+
+<div class="sw">
+  <p class="ew">Senior Leadership &amp; Directors</p>
+  <h2 class="sh">Institute <em>Directors</em></h2>
+  <div class="people-filter" style="margin-top:1.5rem">
+    <button class="pf-btn active">All</button>
+    <button class="pf-btn">AI &amp; ML</button>
+    <button class="pf-btn">Quantum</button>
+    <button class="pf-btn">Cybersecurity</button>
+    <button class="pf-btn">Robotics</button>
+    <button class="pf-btn">Biomedical</button>
+    <button class="pf-btn">Photonics</button>
+    <button class="pf-btn">HCI &amp; XR</button>
+    <button class="pf-btn">Climate</button>
+  </div>
+  <div class="people-grid">
+    <div class="person-card sr"><div class="pmono" style="border-color:rgba(201,168,76,.5);color:var(--gold-lt)">RL</div><div class="pname">Prof. Rebecca Lin</div><div class="prole">Director, CARCE</div><div class="pinst">Quantum · AI</div><div class="ppubs">142 publications · 9,400 citations</div></div>
+    <div class="person-card sr"><div class="pmono">SW</div><div class="pname">Dr. Samuel Williams</div><div class="prole">Institute Director · 01</div><div class="pinst">AI Safety &amp; Alignment</div><div class="ppubs">94 publications · 6,200 citations</div></div>
+    <div class="person-card sr"><div class="pmono">AO</div><div class="pname">Dr. Amara Okafor</div><div class="prole">Institute Director · 02</div><div class="pinst">Quantum Information</div><div class="ppubs">78 publications · 4,800 citations</div></div>
+    <div class="person-card sr"><div class="pmono">TM</div><div class="pname">Dr. Teresa Moreira</div><div class="prole">Institute Director · 03</div><div class="pinst">Post-Quantum Cryptography</div><div class="ppubs">85 publications · 5,100 citations</div></div>
+    <div class="person-card sr"><div class="pmono">ET</div><div class="pname">Prof. Elena Torres</div><div class="prole">Institute Director · 04</div><div class="pinst">Robotics &amp; Autonomy</div><div class="ppubs">112 publications · 7,300 citations</div></div>
+    <div class="person-card sr"><div class="pmono">DH</div><div class="pname">Dr. Dalia Hassan</div><div class="prole">Institute Director · 05</div><div class="pinst">Computational Medicine</div><div class="ppubs">89 publications · 5,600 citations</div></div>
+    <div class="person-card sr"><div class="pmono">JP</div><div class="pname">Dr. Ji-Soo Park</div><div class="prole">Institute Director · 06</div><div class="pinst">Silicon Photonics</div><div class="ppubs">67 publications · 3,900 citations</div></div>
+    <div class="person-card sr"><div class="pmono">YN</div><div class="pname">Dr. Yuki Nakamura</div><div class="prole">Institute Director · 07</div><div class="pinst">Spatial Computing &amp; HCI</div><div class="ppubs">71 publications · 4,200 citations</div></div>
+  </div>
+
+  <hr class="section-divide">
+
+  <p class="ew">Senior Researchers</p>
+  <h2 class="sh">Research <em>Faculty</em></h2>
+  <div class="people-grid" style="margin-top:1.5rem">
+    <div class="person-card sr"><div class="pmono">LC</div><div class="pname">Dr. Liang Chen</div><div class="prole">Senior Researcher</div><div class="pinst">Quantum Algorithms</div><div class="ppubs">52 publications</div></div>
+    <div class="person-card sr"><div class="pmono">FA</div><div class="pname">Dr. Farah Al-Rashid</div><div class="prole">Senior Researcher</div><div class="pinst">Multimodal AI</div><div class="ppubs">48 publications</div></div>
+    <div class="person-card sr"><div class="pmono">IP</div><div class="pname">Dr. Ivan Petrov</div><div class="prole">Senior Researcher</div><div class="pinst">Quantum Error Correction</div><div class="ppubs">41 publications</div></div>
+    <div class="person-card sr"><div class="pmono">RS</div><div class="pname">Dr. Rahul Singh</div><div class="prole">Senior Researcher</div><div class="pinst">Hardware Security</div><div class="ppubs">39 publications</div></div>
+    <div class="person-card sr"><div class="pmono">KY</div><div class="pname">Dr. Kenji Yamamoto</div><div class="prole">Senior Researcher</div><div class="pinst">Autonomous Navigation</div><div class="ppubs">44 publications</div></div>
+    <div class="person-card sr"><div class="pmono">EB</div><div class="pname">Dr. Emma Björk</div><div class="prole">Senior Researcher</div><div class="pinst">Brain-Computer Interfaces</div><div class="ppubs">37 publications</div></div>
+    <div class="person-card sr"><div class="pmono">XH</div><div class="pname">Dr. Xiao Hu</div><div class="prole">Senior Researcher</div><div class="pinst">2D Materials</div><div class="ppubs">45 publications</div></div>
+    <div class="person-card sr"><div class="pmono">CG</div><div class="pname">Dr. Carlos Guerrero</div><div class="prole">Senior Researcher</div><div class="pinst">Haptic Interfaces</div><div class="ppubs">34 publications</div></div>
+    <div class="person-card sr"><div class="pmono">WL</div><div class="pname">Dr. Wei Li</div><div class="prole">Senior Researcher</div><div class="pinst">Green Architecture</div><div class="ppubs">38 publications</div></div>
+    <div class="person-card sr"><div class="pmono">NO</div><div class="pname">Dr. Nana Osei</div><div class="prole">Senior Researcher</div><div class="pinst">Climate AI</div><div class="ppubs">29 publications</div></div>
+    <div class="person-card sr"><div class="pmono">PN</div><div class="pname">Dr. Priya Nair</div><div class="prole">Senior Researcher</div><div class="pinst">VLSI &amp; Chiplets</div><div class="ppubs">31 publications</div></div>
+    <div class="person-card sr"><div class="pmono">ML</div><div class="pname">Dr. Marcus Lee</div><div class="prole">Senior Researcher</div><div class="pinst">Clinical AI</div><div class="ppubs">36 publications</div></div>
+  </div>
+
+  <hr class="section-divide">
+
+  <p class="ew">Postdoctoral Researchers</p>
+  <h2 class="sh">Postdoctoral <em>Fellows</em></h2>
+  <p class="si2">CARCE hosts 48 postdoctoral researchers on 1–3 year fellowships, with full access to laboratory facilities and dedicated mentorship from institute directors.</p>
+  <div style="margin-top:1.5rem"><a href="../join/index.html" class="bg">Apply for a Fellowship →</a></div>
+</div>
+
+<footer>
+  <div class="ftop">
+    <div><div class="fwm">CARCE</div><div class="ftag">Engineering the systems that define the next century.</div><div class="orn" style="justify-content:flex-start;margin:1rem 0"><div class="orn-d"></div></div><div class="fdesc">Center for Advanced Research in Computer Engineering. Eight institutes. 320+ researchers.</div></div>
+    <div class="fcol"><h4>Research</h4><ul class="fnav"><li><a href="../institutes/index.html">All Institutes</a></li><li><a href="../research/index.html">Publications</a></li><li><a href="../research/index.html">Datasets</a></li></ul></div>
+    <div class="fcol"><h4>Community</h4><ul class="fnav"><li><a href="index.html">Our Team</a></li><li><a href="../news/index.html">News</a></li><li><a href="../news/index.html">Events</a></li></ul></div>
+    <div class="fcol"><h4>Organization</h4><ul class="fnav"><li><a href="../about/index.html">About</a></li><li><a href="../join/index.html">Careers</a></li><li><a href="../about/index.html">Contact</a></li></ul></div>
+  </div>
+  <div class="fbot"><span>© 2025 Center for Advanced Research in Computer Engineering. All rights reserved.</span><span>Privacy · Terms · Accessibility</span></div>
+</footer>
+<script src="../shared.js"></script>
+<script>document.querySelectorAll('.pf-btn').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.pf-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active')}));</script>
+</body></html>

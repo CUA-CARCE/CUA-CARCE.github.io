@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Research &amp; Publications — CARCE</title>
+<link rel="stylesheet" href="../shared.css">
+<style>
+.research-layout{display:grid;grid-template-columns:1fr 320px;gap:4rem;align-items:start}
+.filter-bar{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.filter-btn{font-size:.58rem;letter-spacing:.16em;text-transform:uppercase;padding:6px 16px;border:1px solid var(--border);color:var(--muted);cursor:none;transition:all .2s;background:none}
+.filter-btn:hover,.filter-btn.active{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.06)}
+.pub-list{display:flex;flex-direction:column}
+.pub-entry{display:grid;grid-template-columns:55px 1fr;gap:1.8rem;padding:1.8rem 0;border-bottom:1px solid rgba(201,168,76,.07);cursor:none;transition:padding-left .3s}
+.pub-entry:first-child{border-top:1px solid rgba(201,168,76,.07)}.pub-entry:hover{padding-left:.8rem}
+.pyr{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--gold);padding-top:3px}
+.pt{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.02rem;color:var(--text);margin-bottom:.45rem;line-height:1.42}
+.pa{font-size:.7rem;color:var(--muted);margin-bottom:3px}
+.pj{font-size:.7rem;color:var(--gold-dk);font-style:italic}
+.paw{display:inline-block;margin-top:7px;font-size:.5rem;letter-spacing:.17em;text-transform:uppercase;padding:3px 9px;border:1px solid rgba(201,168,76,.35);color:var(--gold)}
+.pinst{display:inline-block;margin-top:5px;margin-left:6px;font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;padding:3px 9px;border:1px solid rgba(200,205,216,.15);color:var(--plat-dk)}
+.psb{position:sticky;top:90px}
+.spn{border:1px solid var(--border);margin-bottom:1.2rem}
+.spnh{padding:1rem 1.4rem;background:var(--ink3);font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--border)}
+.fr{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.4rem;border-bottom:1px solid rgba(201,168,76,.06);font-size:.74rem;color:var(--muted);transition:background .2s,color .2s;cursor:none}
+.fr:last-child{border-bottom:none}.fr:hover{background:var(--ink3);color:var(--plat)}
+.frl{display:flex;align-items:center;gap:9px}
+.fpip{width:6px;height:6px;transform:rotate(45deg);flex-shrink:0}
+.fv{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--gold-lt)}
+.metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);margin-top:3rem}
+.metric{background:var(--ink2);padding:2rem;text-align:center}
+.m-num{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:2.8rem;color:var(--gold-lt);display:block;line-height:1}
+.m-lbl{font-size:.54rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+@media(max-width:1000px){.research-layout{grid-template-columns:1fr}.psb{position:static}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-r" id="curR"></div>
+<nav id="nav">
+  <a href="../index.html" class="nlogo"><span class="nlogo-m">CARCE</span><span class="nlogo-s">Center for Advanced Research in Computer Engineering</span></a>
+  <ul class="nlinks">
+    <li><a href="../about/index.html">About</a></li>
+    <li><a href="../institutes/index.html">Institutes</a></li>
+    <li><a href="index.html" class="active">Research</a></li>
+    <li><a href="../people/index.html">People</a></li>
+    <li><a href="../news/index.html">News</a></li>
+    <li><a href="../join/index.html" class="ncta">Join Us</a></li>
+  </ul>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-cur">Research</span></div>
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="page-hero-glow"></div>
+  <p class="page-eyebrow">Publications &amp; Research</p>
+  <h1 class="page-title">Our <em>Research</em></h1>
+  <p class="page-sub">1,847 peer-reviewed publications from CARCE researchers pushing the absolute edge of what is computationally possible.</p>
+</div>
+
+<div class="sw">
+  <div class="metrics-grid sr">
+    <div class="metric"><span class="m-num">1,847</span><span class="m-lbl">Total Publications</span></div>
+    <div class="metric"><span class="m-num">94k+</span><span class="m-lbl">Total Citations</span></div>
+    <div class="metric"><span class="m-num">312</span><span class="m-lbl">Patents Filed</span></div>
+    <div class="metric"><span class="m-num">48</span><span class="m-lbl">Spin-off Companies</span></div>
+  </div>
+
+  <div style="margin-top:3.5rem">
+  <div class="research-layout">
+    <div>
+      <div class="filter-bar">
+        <button class="filter-btn active">All</button>
+        <button class="filter-btn">AI &amp; ML</button>
+        <button class="filter-btn">Quantum</button>
+        <button class="filter-btn">Cybersecurity</button>
+        <button class="filter-btn">Robotics</button>
+        <button class="filter-btn">Biomedical</button>
+        <button class="filter-btn">Photonics</button>
+        <button class="filter-btn">HCI &amp; XR</button>
+        <button class="filter-btn">Climate</button>
+      </div>
+
+      <div class="pub-list">
+        <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Scalable Fault-Tolerant Quantum Error Correction via Topological Surface Codes at Finite Temperature</div><div class="pa">Chen, L. · Okafor, A. · Petrov, I. · et al.</div><div class="pj">Nature Quantum Information, Vol. 11, 2025</div><span class="paw">Featured Article</span><span class="pinst">Institute 02</span></div></div>
+        <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Constitutional AI at Scale: Aligning Foundation Models Without Human Preference Labeling</div><div class="pa">Williams, S. · Nakamura, Y. · Al-Rashid, F.</div><div class="pj">International Conference on Machine Learning (ICML 2025)</div><span class="paw">Outstanding Paper Award</span><span class="pinst">Institute 01</span></div></div>
+        <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Post-Quantum Lattice Cryptography on Constrained Embedded Systems: A Hardware-Software Co-Design</div><div class="pa">Moreira, T. · Singh, R. · Zhao, P.</div><div class="pj">IEEE Symposium on Security &amp; Privacy 2025</div><span class="paw">Best Paper</span><span class="pinst">Institute 03</span></div></div>
+        <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Diffusion Policy Learning for Dexterous Bimanual Manipulation Under Uncertainty</div><div class="pa">Torres, E. · Yamamoto, K. · Guerrero, M.</div><div class="pj">Robotics: Science and Systems (RSS 2025)</div><span class="pinst">Institute 04</span></div></div>
+        <div class="pub-entry sr"><div class="pyr">2025</div><div><div class="pt">Foundation Models for Genomics: Pre-training on 10 Billion Base Pairs for Variant Effect Prediction</div><div class="pa">Hassan, D. · Lee, M. · Björk, E.</div><div class="pj">Nature Methods, 2025</div><span class="paw">Editor's Pick</span><span class="pinst">Institute 05</span></div></div>
+        <div class="pub-entry sr"><div class="pyr">2024</div><div><div class="pt">All-Optical Deep Neural Networks via Silicon Photonic Circuits: 100 TOPS at 1 pJ/op</div><div class="pa">Park, J. · Nair, P. · Hu, X.</div><div class="pj">Nature Photonics, Vol. 18, 2024</div><span class="pinst">Institute 06</span></div></div>
+        <div class="pub-entry sr"><div class="pyr">2024</div><div><div class="pt">Real-Time Neural Radiance Field Rendering for Collaborative Mixed Reality at 120 Hz</div><div class="pa">Nakamura, Y. · Guerrero, C.</div><div class="pj">ACM SIGGRAPH 2024</div><span class="paw">Best Paper</span><span class="pinst">Institute 07</span></div></div>
+        <div class="pub-entry sr"><div class="pyr">2024</div><div><div class="pt">Carbon-Optimal Scheduling for Hyperscale Data Centers Using Forecasted Renewable Availability</div><div class="pa">Osei, N. · Li, W. · Brennan, C.</div><div class="pj">ACM SIGCOMM 2024</div><span class="pinst">Institute 08</span></div></div>
+        <div class="pub-entry sr"><div class="pyr">2024</div><div><div class="pt">Spatially Adaptive Extended Reality for Motor Rehabilitation: A Randomised Clinical Trial</div><div class="pa">Hassan, D. · Björk, E. · Torres, E.</div><div class="pj">The Lancet Digital Health, Vol. 6, 2024</div><span class="paw">Editor's Choice</span><span class="pinst">Institutes 05, 07</span></div></div>
+        <div class="pub-entry sr"><div class="pyr">2024</div><div><div class="pt">Verified Hardware: End-to-End Formal Verification of RISC-V Security Extensions</div><div class="pa">Moreira, T. · Singh, R.</div><div class="pj">IEEE S&amp;P 2024</div><span class="pinst">Institute 03</span></div></div>
+      </div>
+    </div>
+
+    <div class="psb">
+      <div class="spn sr">
+        <div class="spnh">By Institute</div>
+        <div class="fr"><div class="frl"><span class="fpip" style="background:#C9A84C"></span>AI &amp; ML</div><span class="fv">312</span></div>
+        <div class="fr"><div class="frl"><span class="fpip" style="background:#B8A0E8"></span>Quantum</div><span class="fv">284</span></div>
+        <div class="fr"><div class="frl"><span class="fpip" style="background:#E87070"></span>Cybersecurity</div><span class="fv">241</span></div>
+        <div class="fr"><div class="frl"><span class="fpip" style="background:#70C8A0"></span>Robotics</div><span class="fv">198</span></div>
+        <div class="fr"><div class="frl"><span class="fpip" style="background:#E8C070"></span>Biomedical</div><span class="fv">220</span></div>
+        <div class="fr"><div class="frl"><span class="fpip" style="background:#70B0E8"></span>Photonics</div><span class="fv">175</span></div>
+        <div class="fr"><div class="frl"><span class="fpip" style="background:#E890C8"></span>HCI &amp; XR</div><span class="fv">156</span></div>
+        <div class="fr"><div class="frl"><span class="fpip" style="background:#78C878"></span>Climate</div><span class="fv">261</span></div>
+      </div>
+      <div class="spn sr">
+        <div class="spnh">Top Venues</div>
+        <div class="fr"><span>Nature / Science</span><span class="fv">48</span></div>
+        <div class="fr"><span>IEEE S&amp;P / CCS</span><span class="fv">72</span></div>
+        <div class="fr"><span>NeurIPS / ICML</span><span class="fv">95</span></div>
+        <div class="fr"><span>SIGCOMM / OSDI</span><span class="fv">63</span></div>
+        <div class="fr"><span>RSS / ICRA</span><span class="fv">54</span></div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<footer>
+  <div class="ftop">
+    <div><div class="fwm">CARCE</div><div class="ftag">Engineering the systems that define the next century.</div><div class="orn" style="justify-content:flex-start;margin:1rem 0"><div class="orn-d"></div></div><div class="fdesc">Center for Advanced Research in Computer Engineering. Eight institutes. 320+ researchers.</div></div>
+    <div class="fcol"><h4>Research</h4><ul class="fnav"><li><a href="../institutes/index.html">All Institutes</a></li><li><a href="index.html">Publications</a></li><li><a href="index.html">Datasets</a></li><li><a href="index.html">Patents</a></li></ul></div>
+    <div class="fcol"><h4>Community</h4><ul class="fnav"><li><a href="../people/index.html">Our Team</a></li><li><a href="../news/index.html">News</a></li><li><a href="../news/index.html">Events</a></li></ul></div>
+    <div class="fcol"><h4>Organization</h4><ul class="fnav"><li><a href="../about/index.html">About CARCE</a></li><li><a href="../join/index.html">Careers</a></li><li><a href="../about/index.html">Contact</a></li></ul></div>
+  </div>
+  <div class="fbot"><span>© 2025 Center for Advanced Research in Computer Engineering. All rights reserved.</span><span>Privacy · Terms · Accessibility</span></div>
+</footer>
+<script src="../shared.js"></script>
+<script>
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+</script>
+</body></html>

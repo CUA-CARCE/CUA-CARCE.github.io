@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>News &amp; Events — CARCE</title>
+<link rel="stylesheet" href="../shared.css">
+<style>
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.5rem}
+.nc{border:1px solid var(--border);background:var(--ink2);overflow:hidden;cursor:none;transition:border-color .3s,transform .3s;text-decoration:none;display:block}
+.nc:hover{border-color:var(--gold-dk);transform:translateY(-3px)}
+.nth{height:180px;display:flex;align-items:center;justify-content:center;font-size:2.8rem}
+.nc.lead .nth{height:260px}
+.nb{padding:1.6rem}
+.nk{font-size:.52rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.65rem;display:flex;align-items:center;gap:8px}
+.nk::before{content:'';display:block;width:14px;height:1px;background:var(--gold-dk)}
+.nt{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1rem;color:var(--text);line-height:1.42;margin-bottom:.55rem}
+.nc.lead .nt{font-size:1.3rem}
+.nbl{font-size:.75rem;color:var(--muted);line-height:1.62}
+.nft{font-size:.55rem;letter-spacing:.12em;color:var(--dim);margin-top:.9rem;padding-top:.8rem;border-top:1px solid rgba(201,168,76,.07);display:flex;justify-content:space-between}
+.events-list{display:flex;flex-direction:column;gap:1px;background:var(--border);margin-top:2rem}
+.ev-row{background:var(--ink2);padding:1.5rem 2rem;display:flex;align-items:center;gap:2rem;cursor:none;transition:background .2s,padding-left .25s}
+.ev-row:hover{background:var(--ink3);padding-left:2.6rem}
+.ev-date{text-align:center;min-width:60px}
+.ev-month{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block}
+.ev-day{font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--text);line-height:1;display:block}
+.ev-info{}
+.ev-title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1rem;color:var(--text);margin-bottom:.25rem}
+.ev-meta{font-size:.65rem;color:var(--muted);letter-spacing:.06em}
+.ev-badge{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;padding:3px 10px;border:1px solid var(--border);color:var(--plat-dk);margin-left:auto;flex-shrink:0}
+@media(max-width:900px){.news-grid{grid-template-columns:1fr}.ev-row{flex-wrap:wrap;gap:1rem}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-r" id="curR"></div>
+<nav id="nav">
+  <a href="../index.html" class="nlogo"><span class="nlogo-m">CARCE</span><span class="nlogo-s">Center for Advanced Research in Computer Engineering</span></a>
+  <ul class="nlinks">
+    <li><a href="../about/index.html">About</a></li>
+    <li><a href="../institutes/index.html">Institutes</a></li>
+    <li><a href="../research/index.html">Research</a></li>
+    <li><a href="../people/index.html">People</a></li>
+    <li><a href="index.html" class="active">News</a></li>
+    <li><a href="../join/index.html" class="ncta">Join Us</a></li>
+  </ul>
+</nav>
+<div class="breadcrumb"><a href="../index.html">Home</a><span class="breadcrumb-sep">›</span><span class="breadcrumb-cur">News &amp; Events</span></div>
+<div class="page-hero">
+  <div class="page-hero-bg"></div><div class="page-hero-glow"></div>
+  <p class="page-eyebrow">News &amp; Events</p>
+  <h1 class="page-title">Latest from <em>CARCE</em></h1>
+  <p class="page-sub">Breakthroughs, awards, events, and announcements from across CARCE's eight institutes and twenty-four laboratories.</p>
+</div>
+
+<div class="sw">
+  <p class="ew">Featured Stories</p>
+  <h2 class="sh">Recent <em>Highlights</em></h2>
+  <div class="news-grid">
+    <a class="nc lead sr" href="quantum-milestone.html"><div class="nth" style="background:radial-gradient(ellipse at center,#1a0e2e 0%,#08090C 100%)">⚛️</div><div class="nb"><div class="nk">Breakthrough · March 2025</div><div class="nt">CARCE Achieves 1,000-Qubit Logical Coherence Milestone in Collaboration with CERN</div><div class="nbl">Researchers at Institute 02 demonstrate sustained coherence of a 1,000-qubit logical register at near-room temperature — a potential turning point for practical quantum computation.</div><div class="nft"><span>Institute 02 · Quantum</span><span>Read More →</span></div></div></a>
+    <a class="nc sr" href="nsf-grant.html"><div class="nth" style="background:radial-gradient(ellipse at center,#0e1a0e 0%,#08090C 100%)">🌿</div><div class="nb"><div class="nk">Award · Feb 2025</div><div class="nt">$18M NSF Grant Awarded for Sustainable Computing</div><div class="nbl">Five-year grant funds new carbon-aware computing facility and research programme at Institute 08.</div><div class="nft"><span>Institute 08</span><span>Read →</span></div></div></a>
+    <a class="nc sr" href="ai-summit.html"><div class="nth" style="background:radial-gradient(ellipse at center,#1a1200 0%,#08090C 100%)">🏆</div><div class="nb"><div class="nk">Event · June 2025</div><div class="nt">International AI Safety Summit Hosted at CARCE</div><div class="nbl">Leading researchers and policymakers convene to address frontier model alignment challenges.</div><div class="nft"><span>Institute 01</span><span>Register →</span></div></div></a>
+    <a class="nc sr" href="#"><div class="nth" style="background:radial-gradient(ellipse at center,#001520 0%,#08090C 100%)">🧠</div><div class="nb"><div class="nk">Publication · Jan 2025</div><div class="nt">Constitutional AI at Scale Wins ICML Outstanding Paper</div><div class="nbl">ASAL Lab's alignment research recognized as ICML 2025 outstanding paper.</div><div class="nft"><span>Institute 01 · ASAL</span><span>Read →</span></div></div></a>
+    <a class="nc sr" href="#"><div class="nth" style="background:radial-gradient(ellipse at center,#1a0800 0%,#08090C 100%)">🤖</div><div class="nb"><div class="nk">Demo · Dec 2024</div><div class="nt">EAM Lab Demonstrates Bimanual Dexterous Manipulation at Human-Level Dexterity</div><div class="nbl">First system to match human performance on standardized manipulation benchmark.</div><div class="nft"><span>Institute 04 · EAM</span><span>Read →</span></div></div></a>
+    <a class="nc sr" href="#"><div class="nth" style="background:radial-gradient(ellipse at center,#001a10 0%,#08090C 100%)">🧬</div><div class="nb"><div class="nk">Publication · Nov 2024</div><div class="nt">CGSB Lab Publishes Genomics Foundation Model Trained on 10 Billion Base Pairs</div><div class="nbl">Nature Methods paper demonstrates state-of-the-art variant effect prediction across 47 diseases.</div><div class="nft"><span>Institute 05 · CGSB</span><span>Read →</span></div></div></a>
+  </div>
+</div>
+
+<div class="swa">
+  <p class="ew">Upcoming Events</p>
+  <h2 class="sh">CARCE <em>Calendar</em></h2>
+  <div class="events-list">
+    <div class="ev-row sr"><div class="ev-date"><span class="ev-month">Jun</span><span class="ev-day">12</span></div><div class="ev-info"><div class="ev-title">International AI Safety Summit 2025</div><div class="ev-meta">CARCE Main Campus, Cambridge, MA &nbsp;·&nbsp; 3 Days</div></div><div class="ev-badge">Register</div></div>
+    <div class="ev-row sr"><div class="ev-date"><span class="ev-month">Jun</span><span class="ev-day">28</span></div><div class="ev-info"><div class="ev-title">CARCE Annual Symposium on Quantum Computing</div><div class="ev-meta">Quantum Institute Auditorium &nbsp;·&nbsp; 1 Day</div></div><div class="ev-badge">Free</div></div>
+    <div class="ev-row sr"><div class="ev-date"><span class="ev-month">Jul</span><span class="ev-day">15</span></div><div class="ev-info"><div class="ev-title">Summer Institute: Photonics for Computing</div><div class="ev-meta">CARCE Labs &nbsp;·&nbsp; 1 Week Intensive</div></div><div class="ev-badge">Apply</div></div>
+    <div class="ev-row sr"><div class="ev-date"><span class="ev-month">Aug</span><span class="ev-day">04</span></div><div class="ev-info"><div class="ev-title">Seminar: Climate-Aware Data Center Design</div><div class="ev-meta">Online &amp; In-Person Hybrid &nbsp;·&nbsp; 2 Hours</div></div><div class="ev-badge">Free</div></div>
+    <div class="ev-row sr"><div class="ev-date"><span class="ev-month">Sep</span><span class="ev-day">08</span></div><div class="ev-info"><div class="ev-title">CARCE PhD Open Day</div><div class="ev-meta">All Institutes, CARCE Campus &nbsp;·&nbsp; 1 Day</div></div><div class="ev-badge">Register</div></div>
+    <div class="ev-row sr"><div class="ev-date"><span class="ev-month">Oct</span><span class="ev-day">21</span></div><div class="ev-info"><div class="ev-title">Distinguished Lecture: Ethics in AI Systems</div><div class="ev-meta">CARCE Lecture Hall &nbsp;·&nbsp; 2 Hours</div></div><div class="ev-badge">Free</div></div>
+  </div>
+</div>
+
+<footer>
+  <div class="ftop">
+    <div><div class="fwm">CARCE</div><div class="ftag">Engineering the systems that define the next century.</div><div class="orn" style="justify-content:flex-start;margin:1rem 0"><div class="orn-d"></div></div><div class="fdesc">Center for Advanced Research in Computer Engineering. Eight institutes. 320+ researchers.</div></div>
+    <div class="fcol"><h4>Research</h4><ul class="fnav"><li><a href="../institutes/index.html">All Institutes</a></li><li><a href="../research/index.html">Publications</a></li></ul></div>
+    <div class="fcol"><h4>Community</h4><ul class="fnav"><li><a href="../people/index.html">Our Team</a></li><li><a href="index.html">News</a></li><li><a href="index.html">Events</a></li></ul></div>
+    <div class="fcol"><h4>Organization</h4><ul class="fnav"><li><a href="../about/index.html">About</a></li><li><a href="../join/index.html">Careers</a></li><li><a href="../about/index.html">Contact</a></li></ul></div>
+  </div>
+  <div class="fbot"><span>© 2025 Center for Advanced Research in Computer Engineering. All rights reserved.</span><span>Privacy · Terms · Accessibility</span></div>
+</footer>
+<script src="../shared.js"></script>
+</body></html>
